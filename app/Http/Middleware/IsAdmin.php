@@ -19,7 +19,6 @@ class IsAdmin
         if(auth()->check() && auth()->user()->is_admin == 1){
             return $next($request);
         }
-
-        return redirect('/')->with('error', "No tienes permisos de administrador");
+        return redirect('/')->with('error', 'No tienes permisos de administrador');
     }
 }
