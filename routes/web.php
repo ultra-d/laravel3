@@ -28,20 +28,10 @@ Route::resource('portfolio', 'App\Http\Controllers\ProjectController')
 	->names('projects')
 	->parameters(['portfolio' => 'project'])->middleware(['auth', 'verified']);
 
-/*Route::get('/portafolio', 'ProjectController@index')->name('projects.index');
-
-Route::get('/portafolio/crear', 'ProjectController@create')->name('projects.create');
-
-Route::post('/portafolio', 'ProjectController@store')->name('projects.store');
-
-Route::get('/portafolio/{project}', 'ProjectController@show')->name('projects.show');
-
-Route::get('/portafolio/{project}/editar', 'ProjectController@edit')->name('projects.edit');
-
-Route::patch('/portafolio/{project}', 'ProjectController@update')->name('projects.update');
-
-Route::delete('/portafolio/{project}', 'ProjectController@destroy')->name('projects.destroy');*/
-
 Route::view('/contact', 'contact')->name('contact');
 
 Route::post('contact', 'App\Http\Controllers\MessageController@store')->name('messages.store');
+
+Route::prefix('admin')->name('admin.')->group(function(){
+	Route::resource('/users', 'App\Http\Controllers\Admin\UserController');
+});
