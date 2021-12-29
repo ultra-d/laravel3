@@ -4,8 +4,9 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
-class IsAdmin
+class AccessAdmin
 {
     /**
      * Handle an incoming request.
@@ -16,9 +17,10 @@ class IsAdmin
      */
     public function handle(Request $request, Closure $next)
     {
-        if(auth()->check() && auth()->user()->is_admin == 1){
+        if(Gate::allows('is-admin')){
             return $next($request);
         }
-        return redirect('/')->with('error', 'No tienes permisos de administrador');
+
+        return redirect(route('home'));
     }
 }

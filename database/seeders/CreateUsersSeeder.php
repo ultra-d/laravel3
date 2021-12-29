@@ -18,13 +18,11 @@ class CreateUsersSeeder extends Seeder
             [
                 'name' => 'Admin',
                 'email' => 'admin@mercatodo.com',
-                'is_admin' => '1',
                 'password' => bcrypt('password'),
             ],
             [
                 'name' => 'User',
                 'email' => 'user@mercatodo.com',
-                'is_admin' => '0',
                 'password' => bcrypt('password'),
             ],
         ];
