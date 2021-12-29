@@ -8,6 +8,6 @@
 </h1>
 <form action="{{ route('admin.users.update', $user) }}" method="POST">
     @method('PATCH')
-    @include('admin.users.partials.form')
+    @include('admin.users.partials.form', ['edit' => true])
 </form>
 @endsection
