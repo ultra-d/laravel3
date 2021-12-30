@@ -27,7 +27,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('admin.users.create', ['roles' => Role::all()]); //esta vista es similar a register :3
+        return view('admin.users.create', ['roles' => Role::all()]);
     }
 
     /**

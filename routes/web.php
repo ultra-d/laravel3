@@ -32,6 +32,6 @@ Route::view('/contact', 'contact')->name('contact');
 
 Route::post('contact', 'App\Http\Controllers\MessageController@store')->name('messages.store');
 
-Route::prefix('admin')->middleware(['auth', 'verified', 'auth.'])->name('admin.')->group(function(){
+Route::prefix('admin')->middleware(['auth', 'verified', 'auth.isAdmin'])->name('admin.')->group(function(){
 	Route::resource('/users', 'App\Http\Controllers\Admin\UserController');
 });
