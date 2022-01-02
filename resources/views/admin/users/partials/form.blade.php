@@ -3,7 +3,7 @@ Name
 <br>
 <label>
     <input name="name" placeholder= "Nombre" type="text" value="{{old('name')}} 
-    @isset($user) {{ $user->name }} @endisset">
+    @isset($user){{$user->name}}@endisset">
     @error('name')
     <div>
         {{ $message }}
@@ -49,11 +49,7 @@ Password
 @isset($edit)
 <strong>Status</strong>
 <div>
-    <input type="checkbox" id="enable" name="enable" value="1" checked="checked">
-    <label for="enable"> Enable User</label><br>
-</div>
-<div>
-    <input type="checkbox" id="disable" name="disable" value="0">
+    <input type="checkbox" id="disable" name="disable" {{ $user->isDisabled() ? 'checked' : '' }}>
     <label for="disable"> Disable User</label><br>
 </div>
 @endisset

@@ -26,7 +26,7 @@ Route::view('/about', 'about')->name('about');
 
 Route::resource('portfolio', 'App\Http\Controllers\ProjectController')
 	->names('projects')
-	->parameters(['portfolio' => 'project'])->middleware(['auth', 'verified']);
+	->parameters(['portfolio' => 'project'])->middleware(['auth', 'verified', 'auth.checkBanned']);
 
 Route::view('/contact', 'contact')->name('contact');
 

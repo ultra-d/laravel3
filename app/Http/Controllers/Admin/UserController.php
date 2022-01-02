@@ -77,11 +77,13 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id): view
+    public function update(Request $request, User $user)
     {
-        $user = User::findOrFail($id);
+        $user->name=$request->input('name');
+        $user->email=$request->input('email');
+        $user->status=$request->has('disable') ? 0 : 1;
+        $user->save();
 
-        $user->update($request->except(['_token', 'roles']));
         $user->roles()->sync($request->roles);
 
         return redirect(route('admin.users.index'));
@@ -93,10 +95,10 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
 
-        User::destroy($id);
+        User::destroy($user);
 
         return redirect(route('admin.users.index'))->with('status', 'Usuario Eliminado');
 

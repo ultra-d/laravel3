@@ -65,4 +65,15 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return null !== $this->roles()->whereIn('name', $role)->first();
     }
+
+    public function isDisabled(): bool
+    {
+        return ! $this->isEnabled();
+    }
+
+    public function isEnabled(): bool
+    {
+        return (bool) $this->status;
+    }
+    
 }
