@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class SaveProjectRequest extends FormRequest
+class SaveProductRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -33,9 +33,9 @@ class SaveProjectRequest extends FormRequest
     public function messages()
     {
         return [
-            'title.required' => 'El proyecto necesita un titulo.',
-            'description.required' => 'El proyecto necesita una descripcion.',
-            'url.required' => 'El proyecto necesita una descripcion.',
+            'title.required' => 'El producto necesita un titulo.',
+            'description.required' => 'El producto necesita una descripcion.',
+            'url.required' => 'El producto necesita una descripcion.',
 
         ];
     }

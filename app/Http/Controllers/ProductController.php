@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 //use DB;
-use App\Models\Project;
+use App\Models\Product;
 use Illuminate\Http\Request;
-use App\Http\Requests\SaveProjectRequest;
+use App\Http\Requests\SaveProductRequest;
 
-class ProjectController extends Controller
+class ProductController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -22,11 +22,11 @@ class ProjectController extends Controller
         //     ['title' => 'Proyecto #3'],
         //     ['title' => 'Proyecto #4'],
         // ];
-        //$portfolio = DB::table('projects')->get();
-        //$projects = Project::latest()->paginate(2);
+        //$portfolio = DB::table('products')->get();
+        //$products = Product::latest()->paginate(2);
 
-        return view('projects.index', [
-            'projects' => Project::latest()->paginate()
+        return view('products.index', [
+            'products' => Product::latest()->paginate()
         ]);
     }
 
@@ -37,8 +37,8 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        return view('projects.create', [
-            'project' => new Project
+        return view('products.create', [
+            'product' => new Product
         ]);
     }
 
@@ -48,12 +48,12 @@ class ProjectController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(SaveProjectRequest $request)
+    public function store(SaveProductRequest $request)
     {
 
-        Project::create( $request->validated() );
+        Product::create( $request->validated() );
 
-        return redirect()->route('projects.index')->with('status', 'El proyecto fue creado con exito.');
+        return redirect()->route('products.index')->with('status', 'El producto fue creado con exito.');
     }
 
     /**
@@ -62,10 +62,10 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Project $project)
+    public function show(Product $product)
     {
-        return view('projects.show', [
-            'project' => $project
+        return view('products.show', [
+            'product' => $product
         ]);
     }
 
@@ -75,10 +75,10 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Project $project)
+    public function edit(Product $product)
     {
-        return view('projects.edit', [
-            'project' => $project
+        return view('products.edit', [
+            'product' => $product
         ]);
     }
 
@@ -89,11 +89,11 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Project $project, SaveProjectRequest $request)
+    public function update(Product $product, SaveProductRequest $request)
     {
-        $project->update( $request->validated() );
+        $product->update( $request->validated() );
 
-        return redirect()->route('projects.show', $project)->with('status', 'El proyecto fue actualizado con exito.');
+        return redirect()->route('products.show', $product)->with('status', 'El producto fue actualizado con exito.');
     }
 
     /**
@@ -102,10 +102,10 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Project $project)
+    public function destroy(Product $product)
     {
-        $project->delete();
+        $product->delete();
 
-        return redirect()->route('projects.index')->with('status', 'El proyecto fue eliminado con exito.');
+        return redirect()->route('products.index')->with('status', 'El producto fue eliminado con exito.');
     }
 }
