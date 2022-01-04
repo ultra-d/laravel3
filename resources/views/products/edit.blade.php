@@ -3,7 +3,7 @@
 @section('title', 'Crear producto')
 
 @section('content')
-	<h1>Editar proyecto</h1>
+	<h1>Editar producto</h1>
 
 	@include('partials.validation-errors')
 

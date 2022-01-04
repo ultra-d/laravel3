@@ -1,8 +1,9 @@
 @csrf
-Name
+
+{{ __('form.users.name')}}
 <br>
 <label>
-    <input name="name" placeholder= "Nombre" type="text" value="{{old('name')}} 
+    <input name="name" placeholder="{{ __('form.users.name') }}" type="text" value="{{old('name')}} 
     @isset($user){{$user->name}}@endisset">
     @error('name')
     <div>
@@ -11,10 +12,11 @@ Name
     @enderror
 </label>
 <br>
-Email
+
+{{ __('form.users.email') }}
 <br>
 <label>
-    <input name="email" placeholder="Your email" type="email" value="{{ old('email') }} 
+    <input name="email" placeholder="{{ __('form.users.email') }}" type="email" value="{{ old('email') }} 
     @isset($user) {{ $user->email }} @endisset">
     @error('email')
     <div>
@@ -24,10 +26,10 @@ Email
 </label>
 @isset($create)
 <br>
-Password
+{{ __('form.users.password') }}
 <br>
 <label>
-    <input name="password" placeholder="Create password" type="password">
+    <input name="password" placeholder="{{ __('form.users.password') }}" type="password">
     @error('password')
     <div>
         {{ $message }}
@@ -47,10 +49,10 @@ Password
 </div>
 <br>
 @isset($edit)
-<strong>Status</strong>
+<strong>{{ __('form.users.status') }}</strong>
 <div>
     <input type="checkbox" id="disable" name="disable" {{ $user->isDisabled() ? 'checked' : '' }}>
-    <label for="disable"> Disable User</label><br>
+    <label for="disable"> {{ __('form.users.disable') }}</label><br>
 </div>
 @endisset
 <input type="submit" value="Register">

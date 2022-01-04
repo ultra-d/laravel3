@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('title', 'User management')
-<link href="{{ asset('css/app.css') }}" rel="stylesheet"> </link>
+<link href="{{ asset('css/app.css') }}" rel="stylesheet">
 @section('content')
 	<div class="row">
 		<div class="col-12">

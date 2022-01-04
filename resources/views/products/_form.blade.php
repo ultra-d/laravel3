@@ -1,7 +1,8 @@
 @csrf
 
 <label>
-	Titulo del producto <br>
+	{{ __('form.products.title') }} 
+	<br>
 	<input type="text" name="title" value="{{ old('title', $product->title) }}">
 </label>
 <br>
