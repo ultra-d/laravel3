@@ -26,7 +26,7 @@ Route::view('/about', 'about')->name('about');
 
 Route::resource('portfolio', 'App\Http\Controllers\ProductController')
 	->names('products')
-	->parameters(['portfolio' => 'product'])->middleware(['auth', 'verified', 'auth.isAdmin', 'auth.checkBanned']);
+	->parameters(['portfolio' => 'product'])->middleware(['auth', 'verified', 'auth.isAdmin']);
 
 Route::view('/contact', 'contact')->name('contact');
 

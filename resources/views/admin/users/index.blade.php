@@ -34,7 +34,7 @@
 					<th scope="row">{{ $user->id }}</th>
 					<td>{{ $user->name }}</td>
 					<td>{{ $user->email }}</td>
-					<td>{{ $user->status }}</td>
+					<td>@if( $user->status == 1) {{ 'Enabled' }} @else {{ 'Disabled' }} @endif</td>
 					<td>
 						<a class="btn btn-sm btn-primary" 
 						href="{{ route('admin.users.edit', $user->id) }}" 
