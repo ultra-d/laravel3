@@ -24,7 +24,7 @@ class CheckBanned
 
             $request->session()->regenerateToken();
 
-            return redirect()->route('login')->with('error', 'Baneado.');
+            return redirect()->route('login')->with('error', 'Estás deshabilitado');
         }
         return $next($request);
     }

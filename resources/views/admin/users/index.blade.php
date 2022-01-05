@@ -5,12 +5,7 @@
 @section('content')
 <div class="container py-3">
 	<div class="row">
-		<div class="col-12 col-sm-11 mx-auto"> {{-- Dejar solo col 12 en prueba--}}
-			{{--<h1 class="display-6"> {{ __('titles.Admin_panel')}}
-				<a class="btn btn-primary btn-sm btn-success float-right" href="{{ route('admin.users.create') }}" role="button">{{ __('messages.users.create')}}</a>
-			</h1>	--}}			
-		
-
+		<div class="col-12 col-sm-11 mx-auto"> 	
 			<div class="card">
 				<div class="d-flex flex-column justify-content-between align-right ">
 					<h1 class="display-6"> {{ __('titles.Admin_panel')}}

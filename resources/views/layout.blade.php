@@ -16,7 +16,7 @@
 
     @include('partials.nav')
     <div class="d-flex flex-column justify-content-between h-screen">
-        
+        @include('partials.session-status')
         <main>
             @yield('content')
         </main>
