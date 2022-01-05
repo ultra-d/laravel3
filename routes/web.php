@@ -17,7 +17,7 @@ use App\Http\Controllers\ProjectController;
 */
 Route::get('/', function () {
     return view('home');
-})->name('home');
+})->name('home')->middleware('verified');
 
 Route::get('saludo/{nombre?}', function($nombre = "Invitado"){
 	return "Saludos, don chimbo " . $nombre;

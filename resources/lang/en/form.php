@@ -38,5 +38,6 @@ return [
         'save' => 'Save',
         'logout' => 'Logout',
         'register' => 'Register',
+        'click' => 'Click Here',
     ]
 ];

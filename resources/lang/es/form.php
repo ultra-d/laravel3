@@ -38,5 +38,6 @@ return [
         'save' => 'Guardar',
         'logout' => 'Cerrar Sesión',
         'register' => 'Registrarse',
+        'click' => 'Click Aquí',
     ]
 ];
