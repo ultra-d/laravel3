@@ -12,9 +12,11 @@
 		
 
 			<div class="card">
-				<h1 class="display-6"> {{ __('titles.Admin_panel')}}
-					<a class="btn btn-primary btn-sm btn-success float-right" href="{{ route('admin.users.create') }}" role="button">{{ __('messages.users.create')}}</a>
-				</h1>
+				<div class="d-flex flex-column justify-content-between align-right ">
+					<h1 class="display-6"> {{ __('titles.Admin_panel')}}
+						<a class="btn btn-primary btn-sm btn-success" href="{{ route('admin.users.create') }}" role="button">{{ __('messages.users.create')}}</a>
+					</h1>
+				</div>
 			
 				<table class="table">
 				<thead>
