@@ -3,7 +3,7 @@
 @section('title', 'Contact')
 
 @section('content')
-<div class="container">
+<div class="container py-3">
 	<div class="row">
 		<div class="col-12 col-sm-10 col-lg-6 mx-auto">
 			<form class="bg-white shadow rounded py-3 px-4"
@@ -11,6 +11,7 @@
 			action="{{ route('messages.store') }}">
 			@csrf
 			<h1 class="display-5">{{ __('form.fields.contact') }}</h1>
+			<hr>
 			<div class="form-group">
 				<label for="name">{{ __('form.users.name')}}</label>
 				<input class="form-control bg-light shadow-sm 
@@ -37,7 +38,7 @@
 				id="email" 
 				type="email" 
 				name="email" 
-				placeholder="{{ __('form.users.name')}}" 
+				placeholder="{{ __('form.users.email')}}" 
 				value="{{ old('email') }}">
 				@error('email')
 				<span class="invalid-feedback" role="alert">>

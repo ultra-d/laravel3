@@ -23,11 +23,20 @@ return [
         'surname' => 'Apellido',
         'email' => 'Correo Electrónico',
         'password' => 'Contraseña',
+        'password_confirm' => 'Confirmar Contraseña',
         'status' => 'Estado',
         'disable' => 'Deshabilitar Usuario',
+        'actions' => 'Acciones',
+        'hi' => 'Hola',
     ],
 
     'button' => [
         'send' => 'Enviar',
+        'login' => 'Iniciar Sesion',
+        'edit' => 'Editar',
+        'delete' => 'Eliminar',
+        'save' => 'Guardar',
+        'logout' => 'Cerrar Sesión',
+        'register' => 'Registrarse',
     ]
 ];

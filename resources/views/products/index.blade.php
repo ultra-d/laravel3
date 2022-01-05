@@ -3,6 +3,7 @@
 @section('title', 'Portafolio')
 
 @section('content')
+	<h1>EN CONSTRUCCIÓN</h1>
 	<h1>Portafolio</h1>
 	<a href="{{ route('products.create') }}">Crear producto</a>
 	<ul>

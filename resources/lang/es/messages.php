@@ -7,5 +7,6 @@ return [
     ],
     'form' => [
         'content' => 'Ingrese su mensaje',
+        'forgot_pass' => 'Olvidó su contraseña',
     ]
 ];

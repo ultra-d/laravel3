@@ -8,5 +8,6 @@ return [
     ],
     'form' => [
         'content' => 'Your message',
+        'forgot_pass' => 'Forgot Password',
     ]
 ];

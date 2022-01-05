@@ -7,5 +7,6 @@ return [
     'About' => 'About Us',
     'Contact' => 'Contact Us',
     'Admin' => 'Admin Users',
-
+    'Register' => 'Register',
+    'Admin_panel' => 'Admin Users Panel',
 ];

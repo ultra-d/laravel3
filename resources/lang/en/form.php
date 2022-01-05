@@ -23,11 +23,20 @@ return [
         'surname' => 'Surname',
         'email' => 'Email',
         'password' => 'Password',
+        'password_confirm' => 'Confirm Password',
         'status' => 'Status',
         'disable' => 'Disable User',
+        'actions' => 'Actions',
+        'hi' => 'Hello',
     ],
 
     'button' => [
         'send' => 'Send',
+        'login' => 'Login',
+        'edit' => 'Edit',
+        'delete' => 'Delete',
+        'save' => 'Save',
+        'logout' => 'Logout',
+        'register' => 'Register',
     ]
 ];

@@ -3,48 +3,64 @@
 @section('title', 'User management')
 <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 @section('content')
+<div class="container py-3">
 	<div class="row">
-		<div class="col-12">
-			<h1 class="float-left"> Manage Users</h1>
-			<a class="btn btn-sm btn-success float-right" href="{{ route('admin.users.create') }}" role="button">Create User</a>
+		<div class="col-12 col-sm-11 mx-auto"> {{-- Dejar solo col 12 en prueba--}}
+			{{--<h1 class="display-6"> {{ __('titles.Admin_panel')}}
+				<a class="btn btn-primary btn-sm btn-success float-right" href="{{ route('admin.users.create') }}" role="button">{{ __('messages.users.create')}}</a>
+			</h1>	--}}			
+		
+
+			<div class="card">
+				<h1 class="display-6"> {{ __('titles.Admin_panel')}}
+					<a class="btn btn-primary btn-sm btn-success float-right" href="{{ route('admin.users.create') }}" role="button">{{ __('messages.users.create')}}</a>
+				</h1>
+			
+				<table class="table">
+				<thead>
+					<tr>
+					<th scope="col">#ID</th>
+					<th scope="col">{{ __('form.users.name')}}</th>
+					<th scope="col">{{ __('form.users.email')}}</th>
+					<th scope="col">{{ __('form.users.status')}}</th>
+					<th scope="col">{{ __('form.users.actions')}}</th>
+					</tr>
+				</thead>
+				<tbody>
+				@foreach($users as $user)
+					<tr>
+					<th scope="row">{{ $user->id }}</th>
+					<td>{{ $user->name }}</td>
+					<td>{{ $user->email }}</td>
+					<td>{{ $user->status }}</td>
+					<td>
+						<a class="btn btn-sm btn-primary" 
+						href="{{ route('admin.users.edit', $user->id) }}" 
+						role="button">{{ __('form.button.edit')}}</a>
+
+						<button 
+						type="button" 
+						class="btn btn-sm btn-danger" 
+						onclick="event.preventDefault(); document.getElementById('delete-user-form-{{ $user->id }}').submit()">
+						{{ __('form.button.delete')}}
+						</button>
+
+						<form id="delete-user-form-{{ $user->id }}" 
+						action="{{ route('admin.users.destroy', $user->id) }}" 
+						method="POST" 
+						style="display: none">
+						@method("DELETE")
+						@csrf
+						</form>
+					</td>
+					</tr>
+				@endforeach
+				</tbody>
+				</table>
+				{{ $users->links() }}
+
+			</div>
 		</div>
 	</div>
-
-	<div class="card">
-		<table class="table">
-		  <thead>
-		    <tr>
-		      <th scope="col">#ID</th>
-		      <th scope="col">Name</th>
-		      <th scope="col">Email</th>
-			  <th scope="col">Status</th>
-		      <th scope="col">Actions</th>
-		    </tr>
-		  </thead>
-		  <tbody>
-		  @foreach($users as $user)
-		  	<tr>
-		      <th scope="row">{{ $user->id }}</th>
-		      <td>{{ $user->name }}</td>
-		      <td>{{ $user->email }}</td>
-			  <td>{{ $user->status }}</td>
-		      <td>
-		      	<a class="btn btn-sm btn-primary" href="{{ route('admin.users.edit', $user->id) }}" role="button">Edit</a>
-
-		      	<button type="button" class="btn btn-sm btn-danger" onclick="event.preventDefault(); document.getElementById('delete-user-form-{{ $user->id }}').submit()">
-		      		Delete
-		      	</button>
-
-		      	<form id="delete-user-form-{{ $user->id }}" action="{{ route('admin.users.destroy', $user->id) }}" method="POST" style="display: none">
-		      		@csrf
-		      		@method("DELETE")
-		      	</form>
-		      </td>
-		    </tr>
-		  @endforeach
-		  </tbody>
-		</table>
-		 {{ $users->links() }}
-
-	</div>
+</div>
 @endsection

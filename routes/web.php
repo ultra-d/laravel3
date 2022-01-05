@@ -16,7 +16,7 @@ use App\Http\Controllers\ProjectController;
 |
 */
 Route::get('/', function () {
-    return view('home2');
+    return view('home');
 })->name('home');
 
 Route::get('saludo/{nombre?}', function($nombre = "Invitado"){
@@ -26,7 +26,7 @@ Route::view('/about', 'about')->name('about');
 
 Route::resource('portfolio', 'App\Http\Controllers\ProductController')
 	->names('products')
-	->parameters(['portfolio' => 'product'])->middleware(['auth', 'verified', 'auth.checkBanned']);
+	->parameters(['portfolio' => 'product'])->middleware(['auth', 'verified', 'auth.isAdmin', 'auth.checkBanned']);
 
 Route::view('/contact', 'contact')->name('contact');
 
