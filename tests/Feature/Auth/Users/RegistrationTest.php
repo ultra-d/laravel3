@@ -9,19 +9,22 @@ use Tests\TestCase;
 
 class RegistrationTest extends TestCase
 {
+    use RefreshDatabase;
     /**
      * A basic feature test example.
      *
      * @return void
      */
-    public function test_user_can_be_registered()
+    public function test_user_can_register()
     {
         $response = $this->get('/register');
 
         $response->assertStatus(200);
+
+        $response->assertViewIs('auth.register');
     }
     
-    public function test_user_can_register()
+    public function test_user_can_be_registered()
     {
         $response = $this->post('/register', [
             'name' => 'Test User',
@@ -31,5 +34,6 @@ class RegistrationTest extends TestCase
         ]);
         
         $this->assertAuthenticated();
+        $response->assertRedirect(RouteServiceProvider::HOME);
     }
 }
