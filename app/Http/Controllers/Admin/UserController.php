@@ -46,17 +46,6 @@ class UserController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
@@ -79,7 +68,7 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        $user->name=$request->input('name');
+        $user->name = $request->input('name');
         $user->email=$request->input('email');
         $user->status=$request->has('disable') ? 0 : 1;
         $user->save();
