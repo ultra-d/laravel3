@@ -42,7 +42,7 @@ class UserController extends Controller
 
         $user->roles()->sync($request -> roles);
 
-        return redirect(route('admin.users.index'))->with('status', 'Usuario creado'); 
+        return redirect(route('admin.users.index'))->with('status', 'Usuario creado');
     }
 
     /**
@@ -90,6 +90,5 @@ class UserController extends Controller
         User::destroy($user);
 
         return redirect(route('admin.users.index'))->with('status', 'Usuario Eliminado');
-
     }
 }

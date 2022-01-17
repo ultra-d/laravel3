@@ -15,7 +15,7 @@ class RegistrationTest extends TestCase
      *
      * @return void
      */
-    public function test_user_can_register()
+    public function testUserCanRegister()
     {
         $response = $this->get('/register');
 
@@ -24,14 +24,13 @@ class RegistrationTest extends TestCase
         $response->assertViewIs('auth.register');
     }
     
-    public function test_user_can_be_registered()
+    public function testUserCanBeRegistered()
     {
         $response = $this->post('/register', [
             'name' => 'Test User',
             'email' => 'testuser@example.com',
             'password' => 'password',
-            'password_confirmation' => 'password',
-        ]);
+            'password_confirmation' => 'password',]);
         
         $this->assertAuthenticated();
         $response->assertRedirect(RouteServiceProvider::HOME);

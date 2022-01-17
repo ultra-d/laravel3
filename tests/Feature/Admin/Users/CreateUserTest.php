@@ -14,7 +14,7 @@ class CreateUserTest extends TestCase
      *
      * @return void
      */
-    public function test_admin_can_create_user()
+    public function testAdminCanCreateUser()
     {
         $this->withoutExceptionHandling();
         $this->expectException('Illuminate\Auth\AuthenticationException');
@@ -24,5 +24,3 @@ class CreateUserTest extends TestCase
         $response->assertStatus(200);
     }
 }
-
-
