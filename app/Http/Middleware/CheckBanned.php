@@ -17,12 +17,11 @@ class CheckBanned
      */
     public function handle(Request $request, Closure $next)
     {
-        if (auth()->check() && (auth()->user()->status == 0)) {
+        if (auth()->check() && auth()->user()->isDisabled()) {
+
             Auth::logout();
-
-            $request->session()->invalidate();
-
-            $request->session()->regenerateToken();
+            session()->invalidate();
+            session()->regenerateToken();
 
             return redirect()->route('login')->with('error', 'Estás deshabilitado');
         }
