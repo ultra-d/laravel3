@@ -11,7 +11,17 @@
             action="{{ route('admin.users.update', $user) }}" method="POST">
             <h1 class="display-6"> {{__('messages.users.edit') }}</h1>
             @method('PATCH')
-            @include('admin.users.partials.form', ['edit' => true])
+            @include('admin.users.partials.form')
+            <strong>{{ __('form.users.status') }}</strong>
+            <div>
+                <input class="form-check-input border-0.03 shadow" type="checkbox" id="disable" name="disable" {{ $user->isDisabled() ? 'checked' : '' }}>
+                <label class="form-check-label" for="disable"> {{ __('form.users.disable') }}</label>
+                <br>
+            </div>
+            <button class="btn btn-primary btn-lg btn-block">
+                {{ __('form.button.save')}}
+            </button>
+            
         </form>
     </div>
 </div>

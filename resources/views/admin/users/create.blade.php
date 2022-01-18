@@ -12,7 +12,28 @@
                 method="POST">
                 <h1 class="display-6"> {{ __('messages.users.create') }} </h1>
                 <hr>
-                @include('admin.users.partials.form', ['create' => true])
+                @include('admin.users.partials.form')
+                <div class="form-group">
+                    <label for="password">{{ __('form.users.password')}}</label>
+                    <input class="form-control bg-light shadow-sm
+                    @error('password')
+                    is-invalid @else border-0
+                    @enderror"
+                    id="password"
+                    type="password" 
+                    name="password" 
+                    placeholder="{{ __('form.users.password')}}" 
+                    value="{{ old('password') }}">
+                    @error('password')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message}}</strong>
+                    </span>
+                    @enderror
+                    <br>
+                    <button class="btn btn-primary btn-lg btn-block">
+                        {{ __('form.button.save')}}
+                    </button>
+                </div>
             </form>
         </div>
     </div>

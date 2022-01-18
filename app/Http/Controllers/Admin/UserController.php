@@ -3,10 +3,13 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
+use App\Http\Requests\User\SaveUserRequest;
 use App\Models\User;
 use App\Models\Role;
+use Illuminate\Http\RedirectResponse;
 
 class UserController extends Controller
 {
@@ -15,7 +18,7 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(): View
     {
         return view('admin.users.index', ['users' => User::paginate(10)]);
     }
@@ -25,9 +28,9 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(): View
     {
-        return view('admin.users.create', ['roles' => Role::all()]);
+        return view('admin.users.create', ['roles' => Role::all(), 'user' => new User]);
     }
 
     /**
@@ -36,11 +39,12 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(SaveUserRequest $request): RedirectResponse
     {
-        $user = User::create($request->except(['_token', 'roles']));
 
-        $user->roles()->sync($request -> roles);
+        $user = User::create($request->only(['name', 'email', 'password']));
+
+        $user->roles()->sync($request->roles);
 
         return redirect(route('admin.users.index'))->with('status', 'Usuario creado');
     }
@@ -51,7 +55,7 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($id): View
     {
         return view('admin.users.edit', [
             'roles' => Role::all(),
@@ -66,11 +70,11 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(SaveUserRequest $request, User $user): RedirectResponse
     {
         $user->name = $request->input('name');
-        $user->email=$request->input('email');
-        $user->status=$request->has('disable') ? 0 : 1;
+        $user->email = $request->input('email');
+        $user->status = $request->has('disable') ? 0 : 1;
         $user->save();
 
         $user->roles()->sync($request->roles);
@@ -84,7 +88,7 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy(User $user): RedirectResponse
     {
 
         User::destroy($user);

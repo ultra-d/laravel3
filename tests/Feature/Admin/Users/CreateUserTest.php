@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
+use App\Models\User;
 
 class CreateUserTest extends TestCase
 {
@@ -14,12 +15,13 @@ class CreateUserTest extends TestCase
      *
      * @return void
      */
-    public function testAdminCanCreateUser()
+    public function testAdminCanCreateUser(): void
     {
-        $this->withoutExceptionHandling();
-        $this->expectException('Illuminate\Auth\AuthenticationException');
+        $user = User::factory()->create();
+        //dd($user->all());
 
-        $response = $this->get(route('admin.users.store'));
+        $response = $this->actingAs($user)->get(route('admin.users.create'));
+        dd($response->getContent());
         $response->assertViewIs('admin.users.create');
         $response->assertStatus(200);
     }

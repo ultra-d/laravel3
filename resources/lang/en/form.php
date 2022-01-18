@@ -3,11 +3,13 @@
 return [
     'products' => [
         'title' => 'Product Title',
-        'create' => 'Create a Product',
+        'create' => 'Create New Product',
         'edit' => 'Edit',
         'index' => 'Show product',
         'show' => 'Show',
         'delete' => 'Delete',
+        'description' => 'Description',
+        'url' => 'Product URL',
     ],
     'fields' => [
         'subject' => 'Subject',

@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 //use DB;
 use App\Models\Product;
-use Illuminate\Http\Request;
 use App\Http\Requests\SaveProductRequest;
 
 class ProductController extends Controller
@@ -16,15 +15,6 @@ class ProductController extends Controller
      */
     public function index()
     {
-        // $portfolio = [
-        //     ['title' => 'Proyecto #1'],
-        //     ['title' => 'Proyecto #2'],
-        //     ['title' => 'Proyecto #3'],
-        //     ['title' => 'Proyecto #4'],
-        // ];
-        //$portfolio = DB::table('products')->get();
-        //$products = Product::latest()->paginate(2);
-
         return view('products.index', [
             'products' => Product::latest()->paginate()
         ]);
@@ -51,7 +41,7 @@ class ProductController extends Controller
     public function store(SaveProductRequest $request)
     {
 
-        Product::create( $request->validated() );
+        Product::create($request->validated());
 
         return redirect()->route('products.index')->with('status', 'El producto fue creado con exito.');
     }
@@ -91,7 +81,7 @@ class ProductController extends Controller
      */
     public function update(Product $product, SaveProductRequest $request)
     {
-        $product->update( $request->validated() );
+        $product->update($request->validated());
 
         return redirect()->route('products.show', $product)->with('status', 'El producto fue actualizado con exito.');
     }

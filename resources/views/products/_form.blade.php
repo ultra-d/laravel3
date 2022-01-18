@@ -1,19 +1,34 @@
 @csrf
 
-<label>
-	{{ __('form.products.title') }} 
-	<br>
-	<input type="text" name="title" value="{{ old('title', $product->title) }}">
-</label>
+<div class="form-group">
+	<label for="title"> 
+		{{ __('form.products.title') }}
+	</label>
+	<input class="form-control border-0 bg-light shadow-sm"
+		id="title"
+		type="text" 
+		name="title" 
+		value="{{ old('title', $product->title) }}">
+</div>
+
+<div class="form-group">
+	<label>
+		{{ __('form.products.description') }}  
+	</label>
+	<textarea class="form-control border-0 bg-light shadow-sm"
+		name="description">{{ old('description', $product->description) }}</textarea>
+</div>
+
+<div class="form-group">
+	<label>
+		{{ __('form.products.url') }} 
+	</label>
+	<input class="form-control border-0 bg-light shadow-sm"
+		id="url"
+		type="text" 
+		name="url" 
+		value="{{ old('url', $product->url) }}">
+</div>
 <br>
-<label>
-	Descripcion <br>
-	<textarea name="description">{{ old('description', $product->description) }}</textarea>
-</label>
-<br>
-<label>
-	URL <br>
-	<input type="text" name="url" value="{{ old('url', $product->url) }}">
-</label>
-<br>
-<button>{{ $btnText }}</button>
+
+<button class="btn btn-primary btn-lg btn-block">{{ $btnText }}</button>

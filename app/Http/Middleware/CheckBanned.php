@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 
 class CheckBanned
 {
@@ -17,7 +17,7 @@ class CheckBanned
      */
     public function handle(Request $request, Closure $next)
     {
-        if(auth()->check() && (auth()->user()->status == 0)){
+        if (auth()->check() && (auth()->user()->status == 0)) {
             Auth::logout();
 
             $request->session()->invalidate();

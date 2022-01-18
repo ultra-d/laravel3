@@ -8,6 +8,8 @@ return [
         'index' => 'Show product',
         'show' => 'Mostrar',
         'delete' => 'Eliminar',
+        'description' => 'Descripción',
+        'url' => 'URL del producto',
     ],
     'fields' => [
         'subject' => 'Asunto',

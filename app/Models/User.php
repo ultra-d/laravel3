@@ -45,7 +45,7 @@ class User extends Authenticatable implements MustVerifyEmail
     ];
     public function setPasswordAttribute($password)
     {
-        if (Hash::needsRehash($password)){
+        if (Hash::needsRehash($password)) {
             $password = Hash::make($password);
         }
         $this->attributes['password'] = $password;
@@ -75,5 +75,4 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return (bool) $this->status;
     }
-    
 }

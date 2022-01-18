@@ -24,10 +24,11 @@ Route::resource('portfolio', 'App\Http\Controllers\ProductController')
 ->names('products')
 ->parameters(['portfolio' => 'product'])->middleware(['auth', 'verified', 'auth.isAdmin']);
 
+
 Route::view('/contact', 'contact')->name('contact')->middleware(['auth', 'verified']);
 
 Route::post('/contact', 'App\Http\Controllers\MessageController@store')->name('messages.store');
 
-Route::prefix('admin')->middleware(['auth', 'verified', 'auth.isAdmin' ])->name('admin.')->group(function () {
+Route::prefix('admin')->middleware(['auth', 'verified', 'auth.isAdmin', 'checkbanned' ])->name('admin.')->group(function () {
     Route::resource('/users', 'App\Http\Controllers\Admin\UserController');
 });

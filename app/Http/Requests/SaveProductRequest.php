@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class SaveProductRequest extends FormRequest
 {
@@ -11,7 +12,7 @@ class SaveProductRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
         return true;
     }
@@ -21,16 +22,16 @@ class SaveProductRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         return [
-            'title' => 'required',
-            'description' => 'required',
+            'title' => ['required', Rule::unique('products', 'title')->ignore($this->product), 'max:100', 'string'],
+            'description' => ['required', 'string'],
             'url' => 'required',
         ];
     }
 
-    public function messages()
+    public function messages(): array
     {
         return [
             'title.required' => 'El producto necesita un titulo.',
@@ -39,5 +40,4 @@ class SaveProductRequest extends FormRequest
 
         ];
     }
-
 }
