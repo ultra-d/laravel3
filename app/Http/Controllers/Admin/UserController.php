@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Requests\User\UpdateUserRequest;
 use App\Http\Controllers\Controller;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Gate;
-use Illuminate\Http\Request;
-use App\Http\Requests\User\SaveUserRequest;
 use App\Models\User;
 use App\Models\Role;
 use Illuminate\Http\RedirectResponse;
@@ -39,7 +38,7 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(SaveUserRequest $request): RedirectResponse
+    public function store(UpdateUserRequest $request): RedirectResponse
     {
 
         $user = User::create($request->only(['name', 'email', 'password']));
@@ -47,6 +46,16 @@ class UserController extends Controller
         $user->roles()->sync($request->roles);
 
         return redirect(route('admin.users.index'))->with('status', 'Usuario creado');
+    }
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show(): void
+    {
+        //
     }
 
     /**
@@ -70,7 +79,7 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(SaveUserRequest $request, User $user): RedirectResponse
+    public function update(UpdateUserRequest $request, User $user): RedirectResponse
     {
         $user->name = $request->input('name');
         $user->email = $request->input('email');
