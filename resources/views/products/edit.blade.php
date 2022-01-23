@@ -10,6 +10,7 @@
 			@include('partials.validation-errors')
 			
 			<form class="bg-white shadow rounded py-3 px-4"
+				enctype="multipart/form-data"
 				method="POST" action="{{ route('products.update', $product) }}">
 				@method('PATCH')
 				<h1 class="display-4">Editar producto</h1>

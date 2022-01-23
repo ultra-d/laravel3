@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 //use DB;
 use App\Models\Product;
 use App\Http\Requests\SaveProductRequest;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -40,9 +41,14 @@ class ProductController extends Controller
      */
     public function store(SaveProductRequest $request)
     {
+        $product = new Product($request->validated());
 
-        Product::create($request->validated());
+        $product->image = $request->file('image')->store('images');
 
+        $product->save();
+
+/*         Product::create($request->validated());
+ */
         return redirect()->route('products.index')->with('status', 'El producto fue creado con exito.');
     }
 
@@ -81,7 +87,17 @@ class ProductController extends Controller
      */
     public function update(Product $product, SaveProductRequest $request)
     {
-        $product->update($request->validated());
+        if ($request->hasFile('image')) {
+            Storage::delete($product->image);
+
+            $product->fill($request->validated());
+
+            $product->image = $request->file('image')->store('images');
+
+            $product->save();
+        } else {
+            $product->update(array_filter($request->validated()));
+        }
 
         return redirect()->route('products.show', $product)->with('status', 'El producto fue actualizado con exito.');
     }
@@ -94,6 +110,8 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
+        Storage::delete($product->image);
+        
         $product->delete();
 
         return redirect()->route('products.index')->with('status', 'El producto fue eliminado con exito.');
