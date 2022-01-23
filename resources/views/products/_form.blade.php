@@ -1,5 +1,10 @@
 @csrf
 
+<div class="mb-3">
+	<label for="formFileSm" class="form-label">Seleccionar producto</label>
+	<input name="image" class="form-control form-control-sm" id="formFileSm" type="file">
+  </div>
+
 <div class="form-group">
 	<label for="title"> 
 		{{ __('form.products.title') }}
@@ -31,4 +36,6 @@
 </div>
 <br>
 
-<button class="btn btn-primary btn-lg btn-block">{{ $btnText }}</button>
+<button class="btn btn-primary btn-md w-100">{{ $btnText }}</button>
+<br>
+<a class="btn btn-link w-100" href="{{ route('products.index') }}">Cancelar</a>
