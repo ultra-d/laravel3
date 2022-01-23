@@ -90,7 +90,7 @@
 					<br>
 				</div>
 			
-				<button class="btn btn-primary btn-md btn-block">
+				<button class="btn btn-primary btn-md w-100">
 					{{ __('form.button.send')}}
 				</button>
 

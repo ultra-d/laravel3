@@ -4,7 +4,7 @@
 <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
 @section('content')
-<div class="container">
+<div class="container py-3">
     <div class="row">
         <div class="col-12 col-sm-10 col-lg-6 mx-auto">
             <form class="bg-white shadow rounded py-3 px-4"
@@ -16,9 +16,9 @@
             <div>
                 <input class="form-check-input border-0.03 shadow" type="checkbox" id="disable" name="disable" {{ $user->isDisabled() ? 'checked' : '' }}>
                 <label class="form-check-label" for="disable"> {{ __('form.users.disable') }}</label>
-                <br>
             </div>
-            <button class="btn btn-primary btn-lg btn-block">
+            <br>
+            <button class="btn btn-primary btn-md w-100">
                 {{ __('form.button.save')}}
             </button>
             

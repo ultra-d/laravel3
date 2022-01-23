@@ -4,7 +4,7 @@
 <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
 @section('content')
-<div class="container">
+<div class="container py-3">
 	<div class="row">
 		<div class="col-12 col-sm-10 col-lg-6 mx-auto">
             <form class="bg-white shadow rounded py-3 px-4"
@@ -30,7 +30,7 @@
                     </span>
                     @enderror
                     <br>
-                    <button class="btn btn-primary btn-lg btn-block">
+                    <button class="btn btn-primary btn-md w-100">
                         {{ __('form.button.save')}}
                     </button>
                 </div>
