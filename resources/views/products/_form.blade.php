@@ -1,5 +1,9 @@
 @csrf
 
+@if($product->image)
+	<img class="card-img-top" src="/storage/{{ $product->image }}" alt="{{ $product->title }}">
+@endif
+		
 <div class="mb-3">
 	<label for="formFileSm" class="form-label">Seleccionar producto</label>
 	<input name="image" class="form-control form-control-sm" id="formFileSm" type="file">

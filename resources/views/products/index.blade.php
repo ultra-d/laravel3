@@ -5,29 +5,34 @@
 @section('content')
 
 <div class="container py-3">
+	
 	<div class="d-flex justify-content-between align-items-center">
 		<h1 class="display-4 mb-0">Portafolio</h1>
 		@auth
 		<a class="btn btn-primary btn-sm btn-success" href="{{ route('products.create') }}" role="button">{{ __('form.products.create')}}</a>
 		@endauth
 	</div>
-	<ul class="list-group py-3">
+	
+	<div class="d-flex flex-wrap justify-content-between align-items-start ">
 		@forelse($products as $product)
-		<li class="list-group-item border-0 mb-3 shadow-sm">
-			<a class="text-secondary justify-content-between align-items-center d-flex" href="{{ route('products.show', $product) }}">
-				<span class="font-weight-bold">
-					{{ $product->title }}
-				</span>
-				<span class="text-black-50">
-					{{ $product->created_at->format('d/m/Y')}}
-				</span>
-			</a><br>
-		</li>
+		
+		<div class="card border-0 shadow-sm mt-4 mx-auto" style="width: 18rem;">
+			@if($product->image)
+				<img class="card-img-top" src="/storage/{{ $product->image }}" alt="{{ $product->title }}">
+			@endif
+
+			<div class="card-body">
+				<h5 class="card-title">{{ $product->title }}</h5>
+				<p class="card-text text-truncate"> {{ $product->description }} </p>
+				<h6 class="card-subtitle"> {{ $product->created_at->format('d/m/Y')}} </h6>
+				<a href="{{ route('products.show', $product) }}" class="btn btn-primary">ver más</a>
+			</div>
+		</div>
+		
 		@empty
 		<li class="list-group-item border-0 mb-3 shadow-sm">No hay productos para mostrar</li>
 		@endforelse
 		{{ $products->links() }}
-	</ul>
-	
+	</div>
 </div>
 @endsection

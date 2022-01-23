@@ -28,6 +28,10 @@ class SaveProductRequest extends FormRequest
             'title' => ['required', Rule::unique('products', 'title')->ignore($this->product), 'max:100', 'string'],
             'description' => ['required', 'string'],
             'url' => 'required',
+            'image' => [
+                $this->route('product') ? '' : 'required',
+                'image',
+                'max:2048'],
         ];
     }
 
