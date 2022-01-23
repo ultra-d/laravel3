@@ -40,6 +40,7 @@ class ProductController extends Controller
      */
     public function store(SaveProductRequest $request)
     {
+        return $request->file('image')->store('images');
 
         Product::create($request->validated());
 
