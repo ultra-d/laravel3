@@ -18,9 +18,9 @@
 		
 		<div class="card border-0 shadow-sm mt-4 mx-auto" style="width: 18rem;">
 			@if($product->image)
-				<img class="card-img-top" src="/storage/{{ $product->image }}" alt="{{ $product->title }}">
+			<img class="card-img-top" src="/storage/{{ $product->image }}" alt="{{ $product->title }}">
 			@endif
-
+			
 			<div class="card-body">
 				<h5 class="card-title">{{ $product->title }}</h5>
 				<p class="card-text text-truncate"> {{ $product->description }} </p>
@@ -30,9 +30,15 @@
 		</div>
 		
 		@empty
-		<li class="list-group-item border-0 mb-3 shadow-sm">No hay productos para mostrar</li>
+		<div class="card">
+			<div class="card-body">
+				No hay productos para mostrar
+			</div>
+		</div>
 		@endforelse
-		{{ $products->links() }}
+		<div class="mt-4">
+			{{ $products->links() }}
+		</div>
 	</div>
 </div>
 @endsection
