@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 //use DB;
 use App\Models\Product;
-use App\Http\Requests\SaveProductRequest;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\SaveProductRequest;
+use Intervention\Image\Facades\Image;
 
 class ProductController extends Controller
 {
@@ -46,9 +47,7 @@ class ProductController extends Controller
         $product->image = $request->file('image')->store('images');
 
         $product->save();
-
-/*         Product::create($request->validated());
- */
+        
         return redirect()->route('products.index')->with('status', 'El producto fue creado con exito.');
     }
 
