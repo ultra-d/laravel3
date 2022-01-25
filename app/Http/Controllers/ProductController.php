@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 //use DB;
 use App\Models\Product;
-use App\Http\Requests\SaveProductRequest;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\SaveProductRequest;
+use Intervention\Image\Facades\Image;
 
 class ProductController extends Controller
 {
