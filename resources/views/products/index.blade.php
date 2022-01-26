@@ -18,11 +18,7 @@
 		
 		<div class="card border-0 shadow-sm mt-4 mx-auto" style="width: 18rem;">
 			@if($product->image)
-<<<<<<< HEAD
-			<img class="card-img-top" src="/storage/{{ $product->image }}" alt="{{ $product->title }}">
-=======
 				<img class="card-img-top" style="height: 150px; object-fit: cover" src="/storage/{{ $product->image }}" alt="{{ $product->title }}">
->>>>>>> feature/add-productcontroller-images
 			@endif
 			
 			<div class="card-body">
