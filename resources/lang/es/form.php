@@ -10,6 +10,7 @@ return [
         'delete' => 'Eliminar',
         'description' => 'Descripción',
         'url' => 'URL del producto',
+        'price' => 'Precio del Producto',
     ],
     'fields' => [
         'subject' => 'Asunto',

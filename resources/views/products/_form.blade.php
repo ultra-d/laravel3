@@ -38,6 +38,17 @@
 		name="url" 
 		value="{{ old('url', $product->url) }}">
 </div>
+
+<div class="form-group">
+	<label>
+		{{ __('form.products.price') }} 
+	</label>
+	<input class="form-control border-0 bg-light shadow-sm"
+		id="price"
+		type="text" 
+		name="price" 
+		value="{{ old('price', $product->price) }}">
+</div>
 <br>
 
 <button class="btn btn-primary btn-md w-100">{{ $btnText }}</button>

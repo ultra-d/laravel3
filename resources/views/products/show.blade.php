@@ -13,7 +13,7 @@
 			<div class="bg-white p-5 shadow rounded">
 				<h1>{{ $product->title }}</h1>
 				<p>{{ $product->description }}</p>
-				<p>{{ $product->created_at->diffForHumans() }}</p>
+				<p>${{ $product->price }}</p>
 				
 				<div class="d-flex justify-content-between align-items-center">
 					<a href="{{ route('products.index') }}">Regresar</a>
