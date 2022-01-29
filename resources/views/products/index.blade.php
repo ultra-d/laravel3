@@ -24,7 +24,8 @@
 			<div class="card-body">
 				<h5 class="card-title">{{ $product->title }}</h5>
 				<p class="card-text text-truncate"> {{ $product->description }} </p>
-				<h6 class="card-subtitle"> {{ $product->created_at->format('d/m/Y')}} </h6>
+				<h6 class="card-subtitle"> $ {{ $product->price}} </h6>
+				<br>
 				<a href="{{ route('products.show', $product) }}" class="btn btn-primary">ver más</a>
 			</div>
 		</div>

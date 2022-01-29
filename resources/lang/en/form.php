@@ -5,11 +5,12 @@ return [
         'title' => 'Product Title',
         'create' => 'Create New Product',
         'edit' => 'Edit',
-        'index' => 'Show product',
+        'index' => 'Show Product',
         'show' => 'Show',
         'delete' => 'Delete',
         'description' => 'Description',
         'url' => 'Product URL',
+        'price' => 'Product Price',
     ],
     'fields' => [
         'subject' => 'Subject',
