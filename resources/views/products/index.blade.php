@@ -15,7 +15,6 @@
 	
 	<div class="d-flex flex-wrap justify-content-between align-items-start ">
 		@forelse($products as $product)
-		
 		<div class="card border-0 shadow-sm mt-4 mx-auto" style="width: 18rem;">
 			@if($product->image)
 				<img class="card-img-top" style="height: 150px; object-fit: cover" src="/storage/{{ $product->image }}" alt="{{ $product->title }}">
@@ -26,6 +25,9 @@
 				<p class="card-text text-truncate"> {{ $product->description }} </p>
 				<h6 class="card-subtitle"> $ {{ $product->price}} </h6>
 				<br>
+				@if($product->status == false)
+				<p> OUT OF STOCK </p>
+				@endif
 				<a href="{{ route('products.show', $product) }}" class="btn btn-primary">ver más</a>
 			</div>
 		</div>
@@ -37,9 +39,9 @@
 			</div>
 		</div>
 		@endforelse
-		<div class="mt-4">
-			{{ $products->links() }}
-		</div>
+	</div>
+	<div class="mt-4">
+		{{ $products->links() }}
 	</div>
 </div>
 @endsection
