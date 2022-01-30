@@ -12,6 +12,8 @@
 			
 			<div class="bg-white p-5 shadow rounded">
 				<h1>{{ $product->title }}</h1>
+				<p>Código {{ $product->code }} </p>
+				<p>Existencia {{ $product->quantity }} </p>
 				<p>{{ $product->description }}</p>
 				<p>${{ $product->price }}</p>
 				

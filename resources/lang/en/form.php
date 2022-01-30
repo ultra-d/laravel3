@@ -10,8 +10,11 @@ return [
         'delete' => 'Delete',
         'description' => 'Description',
         'url' => 'Product URL',
-        'price' => 'Product Price',
+        'price' => 'Price',
+        'code' => 'Code',
+        'quantity' => 'Quantity',
     ],
+
     'fields' => [
         'subject' => 'Subject',
         'contact' => 'Contact',
