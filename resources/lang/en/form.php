@@ -13,6 +13,7 @@ return [
         'price' => 'Price',
         'code' => 'Code',
         'quantity' => 'Quantity',
+        'disable' => 'Disable Product',
     ],
 
     'fields' => [

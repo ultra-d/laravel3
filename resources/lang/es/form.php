@@ -13,6 +13,7 @@ return [
         'price' => 'Precio',
         'code' => 'Código',
         'quantity' => 'Cantidad',
+        'disable' => 'Deshabilitar Producto',
     ],
     'fields' => [
         'subject' => 'Asunto',
