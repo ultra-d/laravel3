@@ -1,27 +1,29 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 //use DB;
 use App\Models\Product;
 use Illuminate\Support\Facades\Storage;
-use App\Http\Requests\SaveProductRequest;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Product\SaveProductRequest;
+use Illuminate\Support\Str;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 use Intervention\Image\Facades\Image;
 
 class ProductController extends Controller
 {
-    public function index(): View    
+    public function index(): View
     {
-        return view('products.index', [
+        return view('admin.products.index', [
             'products' => Product::latest()->paginate(8)
         ]);
     }
 
     public function create(): View
     {
-        return view('products.create', [
+        return view('admin.products.create', [
             'product' => new Product
         ]);
     }
@@ -30,11 +32,13 @@ class ProductController extends Controller
     {
         $product = new Product($request->validated());
 
-        $product->image = $request->file('image')->store('images');
+        $product->url = Str::slug($request->input('title'));
+
+        dd($product->image = $request->file('image')->store('images'));
 
         $product->save();
         
-        return redirect()->route('products.index')->with('status', 'El producto fue creado con exito.');
+        return redirect()->route('admin.products.index')->with('status', 'El producto fue creado con exito.');
     }
 
     /**
@@ -45,14 +49,14 @@ class ProductController extends Controller
      */
     public function show(Product $product): View
     {
-        return view('products.show', [
+        return view('admin.products.show', [
             'product' => $product
         ]);
     }
 
     public function edit(Product $product): View
     {
-        return view('products.edit', [
+        return view('admin.products.edit', [
             'product' => $product
         ]);
     }
@@ -62,19 +66,18 @@ class ProductController extends Controller
         if ($request->hasFile('image')) {
             Storage::delete($product->image);
 
-            $product->status = $request->has('disable') ? 0 : 1;
-
-            $product->fill($request->validated());
-
             $product->image = $request->file('image')->store('images');
-
-            $product->save();
-        } else {
-            $product->status = $request->has('disable') ? 0 : 1;
-            $product->update(array_filter($request->validated()));
         }
+        $product->code = $request->input('code');
+        $product->title = $request->input('title');
+        $product->url = Str::slug($request->input('title'));
+        $product->price = $request->input('price');
+        $product->quantity = $request->input('quantity');
+        $product->description = $request->input('description');
+        $product->status = $request->has('disable') ? 0 : 1;
+        $product->save();
 
-        return redirect()->route('products.show', $product)->with('status', 'El producto fue actualizado con exito.');
+        return redirect()->route('admin.products.show', $product)->with('status', 'El producto fue actualizado con exito.');
     }
 
     public function destroy(Product $product): RedirectResponse
@@ -83,6 +86,6 @@ class ProductController extends Controller
         
         $product->delete();
 
-        return redirect()->route('products.index')->with('status', 'El producto fue eliminado con exito.');
+        return redirect()->route('admin.products.index')->with('status', 'El producto fue eliminado con exito.');
     }
 }

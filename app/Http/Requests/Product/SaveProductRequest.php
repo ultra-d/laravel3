@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Product;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
@@ -25,8 +25,8 @@ class SaveProductRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'code' => ['required'],
-            'title' => ['required', Rule::unique('products', 'title')->ignore($this->product), 'max:100', 'string'],
+            'code' => ['required', 'size:10', Rule::unique('products', 'code')->ignore($this->product)],
+            /* 'title' => ['required', Rule::unique('products', 'title')->ignore($this->product), 'max:100', 'string'],
             'description' => ['required', 'string', 'min:10', 'max:250'],
             'url' => ['required', Rule::unique('products', 'url')->ignore($this->product), 'min:6', 'max:100'],
             'image' => [
@@ -34,7 +34,7 @@ class SaveProductRequest extends FormRequest
                 'image',
                 'max:2048'],
             'price' => ['required', 'integer', 'not_in:0'],
-            'quantity' => ['required'],
+            'quantity' => ['required'], */
         ];
     }
 
