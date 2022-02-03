@@ -18,15 +18,19 @@
 			<li class="nav-item {{ setActive('home') }}">
 				<a class="nav-link" href="{{ route('home') }}">{{ __('titles.HOME') }}</a>
 			</li>
-			<li class="nav-item {{ setActive('about') }} nav-item ">
+			@auth
+			<li class="nav-item {{ setActive('about') }}">
 				<a class="nav-link" href="{{ route('about') }}">{{ __('titles.About') }}</a>
 			</li>
+			@can('is-admin')
 			<li class="nav-item {{ setActive('products.*') }}">
-				<a class="nav-link" href="{{ route('products.index') }}">{{ __('titles.Products') }}</a>
+				<a class="nav-link" href="{{ route('admin.products.index') }}">{{ __('titles.Products') }}</a>
 			</li>
+			@endcan
 			<li class="nav-item {{ setActive('contact')  }}">
 				<a class="nav-link" href="{{ route('contact') }}">{{ __('titles.Contact') }}</a>
 			</li>
+			@endauth
 		</ul>
 		<ul class="nav ms-auto">
 			@can('is-admin')
@@ -34,12 +38,6 @@
 				<a class="nav-link" href="{{ route('admin.users.index') }}">{{ __('titles.Admin') }}</a>
 			</li>
 			@endcan
-
-
-
-
-
-
 
 			@auth
 			<li class="nav-item dropdown">
