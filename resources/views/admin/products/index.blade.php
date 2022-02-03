@@ -1,15 +1,15 @@
 @extends('layout')
 
-@section('title', 'Portafolio')
+@section('title', 'AdminProducts')
 
 @section('content')
 
 <div class="container py-3">
 	
 	<div class="d-flex justify-content-between align-items-center">
-		<h1 class="display-4 mb-0">Portafolio</h1>
+		<h1 class="display-4 mb-0">List of Products</h1>
 		@auth
-		<a class="btn btn-primary btn-sm btn-success" href="{{ route('products.create') }}" role="button">{{ __('form.products.create')}}</a>
+		<a class="btn btn-primary btn-sm btn-success" href="{{ route('admin.products.create') }}" role="button">{{ __('form.products.create')}}</a>
 		@endauth
 	</div>
 	
@@ -28,7 +28,7 @@
 				@if($product->status == false)
 				<p> OUT OF STOCK </p>
 				@endif
-				<a href="{{ route('products.show', $product) }}" class="btn btn-primary">ver más</a>
+				<a href="{{ route('admin.products.show', $product) }}" class="btn btn-primary">ver más</a>
 			</div>
 		</div>
 		

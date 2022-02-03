@@ -12,21 +12,21 @@
 			<form class="bg-white shadow rounded py-3 px-4"
 			enctype="multipart/form-data"
 			method="POST" 
-			action="{{ route('products.update', $product) }}">
+			action="{{ route('admin.products.update', $product) }}">
 			@method('PATCH')
 			<h1 class="display-4">Editar producto</h1>
 			<hr>
 			
-			@include('products._form')
+			@include('admin.products._form')
 			
 			<div>
 				<input class="form-check-input border-0.03 shadow" type="checkbox" id="disable" name="disable" {{ $product->isDisabled() ? 'checked' : '' }}>
-				<label class="form-check-label" for="disable"> {{ __('form.users.disable') }}</label>
+				<label class="form-check-label" for="disable"> {{ __('form.products.disable') }}</label>
 			</div>
 			<br>
 			<button class="btn btn-primary btn-md w-100">Actualizar</button>
 			<br>
-			<a class="btn btn-link w-100" href="{{ route('products.index') }}">Cancelar</a>
+			<a class="btn btn-link w-100" href="{{ route('admin.products.index') }}">Cancelar</a>
 		</form>
 	</div>
 </div>

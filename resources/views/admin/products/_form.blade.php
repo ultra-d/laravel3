@@ -79,8 +79,3 @@
 </textarea>
 </div>
 <br>
-
-{{-- <button class="btn btn-primary btn-md w-100">{{ $btnText }}</button>
-<br>
-<a class="btn btn-link w-100" href="{{ route('products.index') }}">Cancelar</a>
---}}

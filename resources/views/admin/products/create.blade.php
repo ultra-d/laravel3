@@ -10,16 +10,16 @@
 			<form class="bg-white shadow rounded py-3 px-4"
 			method="POST"
 			enctype="multipart/form-data" 
-			action="{{ route('products.store') }}">
+			action="{{ route('admin.products.store') }}">
 			
 			<h1 class="display-6">Crear nuevo producto</h1>
 			
-			@include('products._form')
+			@include('admin.products._form')
 			@include('partials.validation-errors')
 			<br>
 			<button class="btn btn-primary btn-md w-100">Crear</button>
 			<br>
-			<a class="btn btn-link w-100" href="{{ route('products.index') }}">Cancelar</a>
+			<a class="btn btn-link w-100" href="{{ route('admin.products.index') }}">Cancelar</a>
 		    </form>
 	</div>
 </div>
