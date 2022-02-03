@@ -34,7 +34,7 @@ class ProductController extends Controller
 
         $product->url = Str::slug($request->input('title'));
 
-        dd($product->image = $request->file('image')->store('images'));
+        $product->image = $request->file('image')->store('images');
 
         $product->save();
         
