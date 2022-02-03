@@ -1,9 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-/*
-Route::prefix('admin')->name('admin.')->group(function(){
-    Route::get('/', function(){
-        return view('admin.flag');
-        })->middleware('is_admin');
-});*/
+
+Route::resource('users', App\Http\Controllers\Admin\UserController::class);
+
+Route::resource('products', App\Http\Controllers\Admin\ProductController::class);
