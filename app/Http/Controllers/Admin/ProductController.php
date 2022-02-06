@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 //use DB;
 use App\Models\Product;
+use App\Models\Category;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Product\SaveProductRequest;
@@ -24,7 +25,8 @@ class ProductController extends Controller
     public function create(): View
     {
         return view('admin.products.create', [
-            'product' => new Product
+            'product' => new Product,
+            'categories' => Category::pluck('name', 'id')
         ]);
     }
 
@@ -57,7 +59,8 @@ class ProductController extends Controller
     public function edit(Product $product): View
     {
         return view('admin.products.edit', [
-            'product' => $product
+            'product' => $product,
+            'categories' => Category::pluck('name', 'id')
         ]);
     }
 
@@ -68,6 +71,7 @@ class ProductController extends Controller
 
             $product->image = $request->file('image')->store('images');
         }
+        $product->category_id = $request->input('category_id');
         $product->code = $request->input('code');
         $product->title = $request->input('title');
         $product->url = Str::slug($request->input('title'));
@@ -77,7 +81,8 @@ class ProductController extends Controller
         $product->status = $request->has('disable') ? 0 : 1;
         $product->save();
 
-        return redirect()->route('admin.products.show', $product)->with('status', 'El producto fue actualizado con exito.');
+        return redirect()->route('admin.products.show', $product)
+        ->with('status', 'El producto fue actualizado con exito.');
     }
 
     public function destroy(Product $product): RedirectResponse

@@ -28,7 +28,13 @@
 				@if($product->status == false)
 				<p> OUT OF STOCK </p>
 				@endif
-				<a href="{{ route('admin.products.show', $product) }}" class="btn btn-primary">ver más</a>
+				<div class="d-flex justify-content-between align-items-center">
+					<a href="{{ route('admin.products.show', $product) }}" 
+					class="btn btn-primary">ver más</a>
+					<span class="badge bg-secondary">
+						{{ $product->category ? $product->category->name : '' }}
+					</span>
+				</div>
 			</div>
 		</div>
 		

@@ -25,6 +25,7 @@ class SaveProductRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'category_id' => ['required', 'exists:categories,id'],
             'code' => ['required', 'size:10', Rule::unique('products', 'code')->ignore($this->product)],
             'title' => ['required', Rule::unique('products', 'title')->ignore($this->product), 'max:100', 'string'],
             'description' => ['required', 'string', 'min:10', 'max:250'],
@@ -43,7 +44,7 @@ class SaveProductRequest extends FormRequest
         return [
             'title.required' => 'El producto necesita un titulo.',
             'description.required' => 'El producto necesita una descripcion.',
-            'url.required' => 'El producto necesita una descripcion.',
+            'url.required' => 'El producto necesita una url.',
 
         ];
     }
