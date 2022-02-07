@@ -14,6 +14,13 @@ return [
         'code' => 'Código',
         'quantity' => 'Cantidad',
         'disable' => 'Deshabilitar Producto',
+        'name' => 'Nombre del producto',
+        'short_qty' => 'Cant.',
+        'category' => 'Categoria',
+        'stock' => 'Existencia',
+        'manage' => 'Administrar',
+        'search' => 'Buscar',
+        'search_p' => 'Buscar Productos',
     ],
     'fields' => [
         'subject' => 'Asunto',
