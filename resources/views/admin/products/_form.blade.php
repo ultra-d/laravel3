@@ -33,7 +33,7 @@
 		id="code"
 		type="text" 
 		name="code" 
-		value="{{ old('title', $product->code) }}">
+		value="{{ old('code', $product->code) }}">
 	</div>
 </div>
 
