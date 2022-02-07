@@ -9,11 +9,11 @@
 			<div class="card">
 
 				<div class="d-flex justify-content-between align-items-center ">
-					<h1 class="display-5 mb-0"> {{ __('titles.products_panel')}}</h1>
+					<h1 id="mydesc" class="display-5 mb-0"> {{ __('titles.products_panel')}}</h1>
 					<a class="btn btn-primary btn-sm btn-success" href="{{ route('admin.products.create') }}" role="button">{{ __('form.products.create')}}</a>
 				</div>
 				<br>
-				<table class="table">
+				<table class="table" aria-describedby="mydesc">
 				<thead>
 					<tr>
 					<th scope="col">#ID</th>
