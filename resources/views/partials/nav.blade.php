@@ -15,16 +15,13 @@
 	
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 		<ul class="nav me-auto">
-			<li class="nav-item {{ setActive('home') }}">
-				<a class="nav-link" href="{{ route('home') }}">{{ __('titles.HOME') }}</a>
-			</li>
 			@auth
-			<li class="nav-item {{ setActive('about') }}">
-				<a class="nav-link" href="{{ route('about') }}">{{ __('titles.About') }}</a>
+			<li class="nav-item {{ setActive('products.*') }}">
+				<a class="nav-link" href="{{ url('/landing') }}">{{ __('Products') }}</a>
 			</li>
 			@can('is-admin')
 			<li class="nav-item {{ setActive('products.*') }}">
-				<a class="nav-link" href="{{ route('admin.products.index') }}">{{ __('titles.Products') }}</a>
+				<a class="nav-link" href="{{ route('admin.products.index') }}">{{ __('titles.admin_products') }}</a>
 			</li>
 			@endcan
 			<li class="nav-item {{ setActive('contact')  }}">

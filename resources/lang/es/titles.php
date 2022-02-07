@@ -9,4 +9,6 @@ return [
     'Admin' => 'Administración de Usuarios',
     'Register' => 'Registro',
     'Admin_panel' => 'Panel de Administración de Usuarios',
+    'products_panel' => 'Panel de Administración de Productos',
+    'admin_products' => 'Admin Productos',
 ];

@@ -14,6 +14,13 @@ return [
         'code' => 'Code',
         'quantity' => 'Quantity',
         'disable' => 'Disable Product',
+        'name' => 'Product Name',
+        'short_qty' => 'Qty',
+        'category' => 'Category',
+        'stock' => 'Stock',
+        'manage' => 'Manage',
+        'search' => 'Search',
+        'search_p' => 'Search Products',
     ],
 
     'fields' => [
