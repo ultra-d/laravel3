@@ -16,19 +16,10 @@ use App\Http\Controllers\ProjectController;
 */
 Route::get('/', function () {
     return view('home');
-})->name('home');
+})->name('home')->middleware(['auth', 'verified']);
 
-Route::view('/about', 'about')->name('about');
-
-/*
-*
-crear una ruta de productos solo para usuario
-Route::resource('portfolio', 'App\Http\Controllers\ProductController')
-->names('products')->parameters(['portfolio' => 'product'])->middleware(['auth', 'verified', 'auth.isAdmin']); 
-*
-*/
-
+Route::get('/search', 'App\Http\Controllers\SearchController@search');
+Route::get('/landing', 'App\Http\Controllers\SearchController@index')->middleware(['auth', 'verified']);
 
 Route::view('/contact', 'contact')->name('contact')->middleware(['auth', 'verified']);
-
 Route::post('/contact', 'App\Http\Controllers\MessageController@store')->name('messages.store');

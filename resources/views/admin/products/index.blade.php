@@ -1,53 +1,68 @@
 @extends('layout')
 
-@section('title', 'AdminProducts')
-
+@section('title', 'Admin Products')
+<link href="{{ asset('css/app.css') }}" rel="stylesheet">
 @section('content')
-
 <div class="container py-3">
-	
-	<div class="d-flex justify-content-between align-items-center">
-		<h1 class="display-4 mb-0">List of Products</h1>
-		@auth
-		<a class="btn btn-primary btn-sm btn-success" href="{{ route('admin.products.create') }}" role="button">{{ __('form.products.create')}}</a>
-		@endauth
-	</div>
-	
-	<div class="d-flex flex-wrap justify-content-between align-items-start ">
-		@forelse($products as $product)
-		<div class="card border-0 shadow-sm mt-4 mx-auto" style="width: 18rem;">
-			@if($product->image)
-				<img class="card-img-top" style="height: 150px; object-fit: cover" src="/storage/{{ $product->image }}" alt="{{ $product->title }}">
-			@endif
-			
-			<div class="card-body">
-				<h5 class="card-title">{{ $product->title }}</h5>
-				<p class="card-text text-truncate"> {{ $product->description }} </p>
-				<h6 class="card-subtitle"> $ {{ $product->price}} </h6>
-				<br>
-				@if($product->status == false)
-				<p> OUT OF STOCK </p>
-				@endif
-				<div class="d-flex justify-content-between align-items-center">
-					<a href="{{ route('admin.products.show', $product) }}" 
-					class="btn btn-primary">ver más</a>
-					<span class="badge bg-secondary">
-						{{ $product->category ? $product->category->name : '' }}
-					</span>
+	<div class="row">
+		<div class="col-12 col-sm-11 mx-auto"> 	
+			<div class="card">
+
+				<div class="d-flex justify-content-between align-items-center ">
+					<h1 class="display-5 mb-0"> {{ __('titles.products_panel')}}</h1>
+					<a class="btn btn-primary btn-sm btn-success" href="{{ route('admin.products.create') }}" role="button">{{ __('form.products.create')}}</a>
 				</div>
+				<br>
+				<table class="table">
+				<thead>
+					<tr>
+					<th scope="col">#ID</th>
+					<th scope="col">{{ __('form.products.name')}}</th>
+					<th scope="col">{{ __('form.products.description')}}</th>
+					<th scope="col">{{ __('form.products.short_qty')}}</th>
+					<th scope="col">{{ __('form.products.price')}}</th>
+					<th scope="col">{{ __('form.products.category')}}</th>
+					<th scope="col">{{ __('form.products.stock')}}</th>
+					<th scope="col">{{ __('form.products.manage')}}</th>
+					</tr>
+				</thead>
+				<tbody>
+				@foreach($products as $product)
+					<tr>
+					<th scope="row">{{ $product->id }}</th>
+					<td>{{ $product->title }}</td>
+					<td>{{ $product->description }}</td>
+					<td>{{ $product->quantity }}</td>
+					<td>{{ $product->price }}</td>
+					<td>{{ $product->category->name }}</td>
+					<td>@if( $product->status == 1) {{ 'Enabled' }} @else {{ 'Disabled' }} @endif</td>
+					<td>
+						<a class="btn btn-sm btn-primary" 
+						href="{{ route('admin.products.edit', $product) }}" 
+						role="button">{{ __('form.button.edit')}}</a>
+
+						<button 
+						type="button" 
+						class="btn btn-sm btn-danger" 
+						onclick="event.preventDefault(); document.getElementById('delete-product-form-{{ $product->id }}').submit()">
+						{{ __('form.button.delete')}}
+						</button>
+
+						<form id="delete-product-form-{{ $product->id }}" 
+						action="{{ route('admin.products.destroy', $product) }}" 
+						method="POST" 
+						style="display: none">
+						@method("DELETE")
+						@csrf
+						</form>
+					</td>
+					</tr>
+				@endforeach
+				</tbody>
+				</table>
+				{{ $products->links() }}
 			</div>
 		</div>
-		
-		@empty
-		<div class="card">
-			<div class="card-body">
-				No hay productos para mostrar
-			</div>
-		</div>
-		@endforelse
-	</div>
-	<div class="mt-4">
-		{{ $products->links() }}
 	</div>
 </div>
 @endsection
