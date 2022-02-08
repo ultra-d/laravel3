@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 //use DB;
 use App\Models\Product;
 use App\Models\Category;
+use App\Actions\UpdateProductAction;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Product\SaveProductRequest;
@@ -40,7 +41,7 @@ class ProductController extends Controller
 
         $product->save();
         
-        return redirect()->route('admin.products.index')->with('status', 'El producto fue creado con exito.');
+        return redirect()->route('admin.products.index')->with('status', __('messages.success.product_created'));
     }
 
     /**
@@ -64,25 +65,18 @@ class ProductController extends Controller
         ]);
     }
 
-    public function update(Product $product, SaveProductRequest $request): RedirectResponse
+    public function update(Product $product, SaveProductRequest $request, UpdateProductAction $action): RedirectResponse
     {
         if ($request->hasFile('image')) {
             Storage::delete($product->image);
 
             $product->image = $request->file('image')->store('images');
         }
-        $product->category_id = $request->input('category_id');
-        $product->code = $request->input('code');
-        $product->title = $request->input('title');
-        $product->url = Str::slug($request->input('title'));
-        $product->price = $request->input('price');
-        $product->quantity = $request->input('quantity');
-        $product->description = $request->input('description');
-        $product->status = $request->has('disable') ? 0 : 1;
-        $product->save();
+    
+        $action->execute($product, $request);
 
         return redirect()->route('admin.products.show', $product)
-        ->with('status', 'El producto fue actualizado con exito.');
+        ->with('status', __('messages.success.product_updated'));
     }
 
     public function destroy(Product $product): RedirectResponse
@@ -91,6 +85,6 @@ class ProductController extends Controller
         
         $product->delete();
 
-        return redirect()->route('admin.products.index')->with('status', 'El producto fue eliminado con exito.');
+        return redirect()->route('admin.products.index')->with('status', __('messages.success.product_deleted'));
     }
 }
