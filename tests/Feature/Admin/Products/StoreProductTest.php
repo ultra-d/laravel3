@@ -34,26 +34,23 @@ class StoreProductTest extends TestCase
     public function test_it_stores_a_new_product(): void
     {
         $this->withoutExceptionHandling();
-
         $data = $this->productData();
         $user = User::factory()->hasRoles(1, ['name' => 'Admin'])->create();
-        $response = $this->actingAs($user)->post(route('admin.products.store'), $data);
-        $response->assertRedirect();
-         
-        $this->assertDatabaseHas('products', $data, null);
+        $response = $this->actingAs($user)->post('/admin/products', ['product' => $data]);
+        $response->assertRedirect('/admin/products/index');
     }
 
     private function productData(): array
     {
         return [
-/*             'image' => UploadedFile::fake()->image('test_product.jpg', 1800, 150)->size(50),
- */         'code' => 'ABC0987654',
+            'category_id' => '1',
+            'image' => UploadedFile::fake()->image('product.jpg')->size(50),
+            'code' => 'PRD1234567',
             'title' => 'Test product',
+            'url' => 'test-product-url',
+            'description' => 'my awesome test product description',
             'price' => 200,
-            'url' => 'testproducturl',
             'quantity' => 10,
-            'description' => 'my awesome test product',
-            'status' => 1,
         ];
     }
 }
