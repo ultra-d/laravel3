@@ -12,7 +12,7 @@ class SearchController extends Controller
     public function index(): View
     {
         return view('landing-menu', [
-            'products' => Product::latest()->paginate(8)
+            'products' => Product::latest()->with('category')->paginate(8)
         ]);
     }
 

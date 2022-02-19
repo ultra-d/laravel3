@@ -25,17 +25,17 @@ class SaveProductRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'category_id' => ['required', 'exists:categories,id'],
+            'category_id' => ['required', 'numeric', 'exists:categories,id'],
             'code' => ['required', 'size:10', Rule::unique('products', 'code')->ignore($this->product)],
-            'title' => ['required', Rule::unique('products', 'title')->ignore($this->product), 'max:100', 'string'],
+            'title' => ['required', 'string', 'max:100', Rule::unique('products', 'title')->ignore($this->product)],
             'description' => ['required', 'string', 'min:10', 'max:250'],
-            'url' => ['required', Rule::unique('products', 'url')->ignore($this->product), 'min:6', 'max:100'],
+            'url' => ['required', 'min:6', 'max:100', Rule::unique('products', 'url')->ignore($this->product)],
             'image' => [
                 $this->route('product') ? '' : 'required',
                 'image',
                 'max:2048'],
-            'price' => ['required', 'integer', 'not_in:0'],
-            'quantity' => ['required'],
+            'price' => ['required', 'integer', 'min:1'],
+            'quantity' => ['required', 'numeric', 'min:1'],
         ];
     }
 
