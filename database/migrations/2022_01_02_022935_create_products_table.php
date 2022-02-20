@@ -12,7 +12,7 @@ class CreateProductsTable extends Migration
             $table->id();
             $table->char('code', 10)->unique();
             $table->string('title', 100);
-            $table->string('url')->unique();
+            $table->string('slug')->unique();
             $table->tinyText('description');
             $table->unsignedInteger('quantity');
             $table->timestamp('disable_at')->nullable();

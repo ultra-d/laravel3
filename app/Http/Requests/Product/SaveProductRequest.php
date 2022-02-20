@@ -29,7 +29,7 @@ class SaveProductRequest extends FormRequest
             'code' => ['required', 'size:10', Rule::unique('products', 'code')->ignore($this->product)],
             'title' => ['required', 'string', 'max:100', Rule::unique('products', 'title')->ignore($this->product)],
             'description' => ['required', 'string', 'min:10', 'max:250'],
-            'url' => ['required', 'min:6', 'max:100', Rule::unique('products', 'url')->ignore($this->product)],
+            'slug' => ['required', 'min:6', 'max:100', Rule::unique('products', 'slug')->ignore($this->product)],
             'image' => [
                 $this->route('product') ? '' : 'required',
                 'image',
@@ -44,7 +44,7 @@ class SaveProductRequest extends FormRequest
         return [
             'title.required' => 'El producto necesita un titulo.',
             'description.required' => 'El producto necesita una descripcion.',
-            'url.required' => 'El producto necesita una url.',
+            'slug.required' => 'El producto necesita una url.',
 
         ];
     }
