@@ -35,7 +35,7 @@ class ProductController extends Controller
     {
         $product = new Product($request->validated());
 
-        $product->url = Str::slug($request->input('title'));
+        $product->slug = Str::slug($request->input('title'));
 
         $product->image = $request->file('image')->store('images');
 

@@ -11,11 +11,12 @@ class ProductFactory extends Factory
     public function definition(): array
     {
         return [
-            'image' => UploadedFile::fake()->image('public/storage/product.jpg', 500, 250)->size(50),
+            //'image' => UploadedFile::fake()->image('public/storage/product.jpg', 500, 250)->size(50),
+            'image' => $this->faker->imageUrl($width = 500, $height = 400),
             'code' => Str::random(10),
-            'title' => $this->faker->words(2, true),
+            'title' => $title = $this->faker->words(2, true),
             'price' => $this->faker->randomDigitNotZero(),
-            'url' => $this->faker->sentence,
+            'slug' => Str::slug($title),
             'quantity' => $this->faker->randomDigitNotZero(),
             'description' => $this->faker->words(5, true),
             'status' => true,

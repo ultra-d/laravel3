@@ -56,7 +56,7 @@
 	id="url"
 	type="text" 
 	name="url" 
-	value="{{ old('url', $product->url) }}">
+	value="{{ old('url', $product->slug) }}">
 </div>
 
 <div class="form-group row mb-3">

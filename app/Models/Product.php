@@ -11,11 +11,11 @@ class Product extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'category_id', 'code', 'url', 'description', 'price', 'quantity', 'disable_at'];
+    protected $fillable = ['title', 'category_id', 'code', 'slug', 'description', 'price', 'quantity', 'disable_at'];
 
     public function getRouteKeyName()
     {
-        return 'url';
+        return 'slug';
     }
 
     public function category(): BelongsTo

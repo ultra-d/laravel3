@@ -47,7 +47,7 @@ class StoreProductTest extends TestCase
             'image' => UploadedFile::fake()->image('product.jpg')->size(50),
             'code' => 'PRD1234567',
             'title' => 'Test product',
-            'url' => 'test-product-url',
+            'slug' => 'test-product-slug',
             'description' => 'my awesome test product description',
             'price' => 200,
             'quantity' => 10,

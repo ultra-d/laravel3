@@ -16,7 +16,7 @@ class UpdateProductAction implements ActionContract
         $product->category_id = $request->input('category_id');
         $product->code = $request->input('code');
         $product->title = $request->input('title');
-        $product->url = Str::slug($request->input('title'));
+        $product->slug = Str::slug($request->input('title'));
         $product->price = $request->input('price');
         $product->quantity = $request->input('quantity');
         $product->description = $request->input('description');
