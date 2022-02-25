@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\Category;
 use App\Http\Controllers\Controller;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
@@ -12,22 +13,26 @@ class SearchController extends Controller
     public function index(): View
     {
         return view('landing-menu', [
-            'products' => Product::latest()->with('category')->paginate(8)
+            'products' => Product::latest()->with('category')->paginate(8),
+            'categories' => Category::pluck('id', 'name')
         ]);
     }
 
     public function search(Request $request): View
     {
         $request->validate([
-            'query' => 'required|min:3|max:120'
+            'title' => 'required|min:3|max:120',
         ]);
-        $query = $request->input('query');
-        
-        $products = Product::where('title', 'like', "%$query%")
-            ->orWhere('description', 'like', "%$query%")
-            ->with('category')
+
+        $title = $request->input('title');
+
+        $products = Product::orderBy('id', 'DESC')
+            ->title($title)
             ->paginate();
 
-        return view('landing-menu')->with('products', $products);
+        return view('landing-menu', [
+            'products' => $products,
+            'categories' => Category::pluck('id', 'name')
+        ]);
     }
 }

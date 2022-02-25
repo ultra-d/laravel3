@@ -7,24 +7,34 @@
 <div class="container py-3">
 
 	<div class="form-outline">
-		<form class="form-inline my-2 my-lg-0" type="get" action="{{ url('/search') }}">
-			<input 
-				type="search" 
-				id="search"
-				name="query"
-				class="form-control mr-sm-2
-				@error('query')
-				is-invalid @else border-1
-				@enderror" 
-				placeholder="{{__('form.products.search_p')}}" 
-				aria-label="Search" />
-				<br>
-				@error('query')
-				<span class="invalid-feedback" role="alert">
-					<strong>{{ $message}}</strong>
-				</span>
-				@enderror
-		</form>
+			
+			<form class="form-inline my-2 my-lg-0 d-flex justify-content-between flex-nowrap" 
+			type="get" action="{{ url('/search') }}">
+				<input 
+					type="search" 
+					id="search"
+					name="title"
+					class="form-control mr-sm-2
+					@error('title')
+					is-invalid @else border-1
+					@enderror" 
+					placeholder="{{__('form.products.search_p')}}" 
+					aria-label="Search" />
+					@error('title')
+					<span class="invalid-feedback" role="alert">
+						<strong>{{ $message}}</strong>
+					</span>
+					@enderror
+
+					<select class="form-control border-0 bg-light shadow-sm"
+					name="category_id" type="search" id="category_id">
+						<option value=""> Categoria </option>
+						@foreach ($categories as $id => $name)
+						<option value="{{ $id }}"> {{ $name }}</option>	
+						@endforeach
+					</select>
+	
+			</form>
 	</div>
 	
 	<div class="d-flex justify-content-between align-items-center">

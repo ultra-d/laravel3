@@ -32,4 +32,18 @@ class Product extends Model
     {
         return (bool) $this->status;
     }
+    //query scope
+    public function scopeTitle($query, $title)
+    {
+        if ($title) {
+            return $query->where('title', 'LIKE', "%$title%");
+        }
+    }
+
+    public function scopeCategoryId($query, $category_id)
+    {
+        if ($category_id) {
+            return $query->where('title', 'LIKE', "%$category_id%");
+        }
+    }
 }

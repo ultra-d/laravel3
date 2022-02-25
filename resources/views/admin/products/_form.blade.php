@@ -49,13 +49,13 @@
 </div>
 
 <div class="form-group mb-3">
-	<label for="url">
+	<label for="slug">
 		{{ __('form.products.url') }} 
 	</label>
 	<input class="form-control border-0 bg-light shadow-sm"
-	id="url"
+	id="slug"
 	type="text" 
-	name="url" 
+	name="slug" 
 	value="{{ old('url', $product->slug) }}">
 </div>
 
