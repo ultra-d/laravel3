@@ -43,11 +43,27 @@
 	
 	<div class="d-flex flex-wrap justify-content-between align-items-start ">
 		@forelse($products as $product)
-		<div class="card border-0 shadow-sm mt-4 mx-auto" style="width: 18rem;">
-			@if($product->image)
-				<img class="card-img-top" style="height: 150px; object-fit: cover" src="/storage/{{ $product->image }}" alt="{{ $product->title }}">
+		<div class="card border-0 shadow-sm mt-4 mx-auto p-0" style="width: 18rem;">
+			@if($product->images->isNotEmpty())
+			<div id="carouselExampleControls-{{ $loop->iteration }}" class="carousel slide card-img-top" data-bs-ride="carousel">
+				<div class="carousel-inner">
+					@foreach($product->images as $image )
+						<div @class(['carousel-item', 'landing-img', 'active' => $loop->first])>
+							<img src="{{ $image->url() }}" class="d-block w-100" alt="{{ $product->title }}">
+						</div>
+					@endforeach
+				</div>
+				<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls-{{ $loop->iteration }}" data-bs-slide="prev">
+				  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+				  <span class="visually-hidden">Previous</span>
+				</button>
+				<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls-{{ $loop->iteration }}" data-bs-slide="next">
+				  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+				  <span class="visually-hidden">Next</span>
+				</button>
+			  </div>
 			@endif
-			
+
 			<div class="card-body">
 				<h5 class="card-title">{{ $product->title }}</h5>
 				<p class="card-text text-truncate"> {{ $product->description }} </p>

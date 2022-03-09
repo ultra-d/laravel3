@@ -48,8 +48,8 @@
 						{{ __('form.button.delete')}}
 						</button>
 
-						<form id="delete-product-form-{{ $product->id }}" 
-						action="{{ route('admin.products.destroy', $product) }}" 
+						<form id="delete-product-form-{{ $product->id }}"
+						action="{{ route('admin.products.destroy', $product) }}"
 						method="POST" 
 						style="display: none">
 						@method("DELETE")
