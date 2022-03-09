@@ -32,6 +32,11 @@ class Product extends Model
     {
         return (bool) $this->status;
     }
+
+    public function images()
+    {
+        return $this->hasMany(Image::class);
+    }
     //query scope
     public function scopeTitle($query, $title)
     {

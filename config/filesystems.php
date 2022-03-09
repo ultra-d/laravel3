@@ -28,11 +28,19 @@ return [
     |
     */
 
+    'images_disk' => ENV('FILESYSTEM_IMAGES_DISK', 'image'),
+
     'disks' => [
 
         'local' => [
             'driver' => 'local',
             'root' => storage_path('app'),
+        ],
+
+        'image' => [
+            'driver' => 'local',
+            'root' => storage_path('images'),
+            'url' => env('APP_URL').'/images',
         ],
 
         'public' => [
