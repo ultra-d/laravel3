@@ -4,9 +4,7 @@ namespace App\Actions;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Actions\ActionContract;
-use App\Models\Product;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class UpdateProductAction implements ActionContract

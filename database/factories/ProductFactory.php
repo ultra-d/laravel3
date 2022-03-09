@@ -11,8 +11,6 @@ class ProductFactory extends Factory
     public function definition(): array
     {
         return [
-            //'image' => UploadedFile::fake()->image('public/storage/product.jpg', 500, 250)->size(50),
-            'image' => $this->faker->imageUrl($width = 500, $height = 400),
             'code' => Str::random(10),
             'category_id' => random_int(1, 2),
             'title' => $title = $this->faker->words(2, true),
