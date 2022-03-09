@@ -11360,3 +11360,9 @@ textarea.form-control-lg {
 .h-screen {
   height: 100vh;
 }
+
+.landing-img {
+  height: 15vw;
+  -o-object-fit: cover;
+     object-fit: cover;
+}

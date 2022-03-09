@@ -4,15 +4,16 @@ namespace App\Http\Controllers\Admin;
 
 //use DB;
 use App\Models\Product;
+use App\Models\Image;
 use App\Models\Category;
 use App\Actions\UpdateProductAction;
+use App\Actions\StoreUpdateProductImagesAction;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Product\SaveProductRequest;
 use Illuminate\Support\Str;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
-use Intervention\Image\Facades\Image;
 
 class ProductController extends Controller
 {
@@ -27,29 +28,24 @@ class ProductController extends Controller
     {
         return view('admin.products.create', [
             'product' => new Product,
+            'images' => new Image,
             'categories' => Category::pluck('name', 'id')
         ]);
     }
 
-    public function store(SaveProductRequest $request): RedirectResponse
+    public function store(SaveProductRequest $request, StoreUpdateProductImagesAction $imagesAction): RedirectResponse
     {
         $product = new Product($request->validated());
 
         $product->slug = Str::slug($request->input('title'));
 
-        $product->image = $request->file('image')->store('images');
-
         $product->save();
+
+        $imagesAction->execute($request->images, $product);
         
         return redirect()->route('admin.products.index')->with('status', __('messages.success.product_created'));
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show(Product $product): View
     {
         return view('admin.products.show', [
@@ -65,12 +61,14 @@ class ProductController extends Controller
         ]);
     }
 
-    public function update(Product $product, SaveProductRequest $request, UpdateProductAction $action): RedirectResponse
+    public function update(Product $product, SaveProductRequest $request, UpdateProductAction $action, StoreUpdateProductImagesAction $imagesAction): RedirectResponse
     {
-        if ($request->hasFile('image')) {
-            Storage::delete($product->image);
+        if ($request->hasFile('images')) {
+            foreach ($product->images as $image) {
+                Storage::delete($image->url());
+            }
 
-            $product->image = $request->file('image')->store('images');
+            $imagesAction->execute($request->images, $product);
         }
     
         $action->execute($product, $request);
@@ -81,10 +79,8 @@ class ProductController extends Controller
 
     public function destroy(Product $product): RedirectResponse
     {
-        Storage::delete($product->image);
-        
         $product->delete();
-
+    
         return redirect()->route('admin.products.index')->with('status', __('messages.success.product_deleted'));
     }
 }
