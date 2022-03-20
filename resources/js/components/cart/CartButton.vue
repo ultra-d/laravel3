@@ -30,9 +30,9 @@ export default {
         this.products = this.content,
         this.count = this.cartCount
 
-        this.emitter.on('add-to-cart', data => {
-            this.count = this.count + data.quantity,
-            this.products.push(data.product)
+        this.emitter.on("add-to-cart", data => {
+            this.count = this.count + data.quantity;
+            this.products.push(data.product);
         })
     }
 }
