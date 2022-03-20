@@ -13,16 +13,18 @@
     </style>
 </head>
 <body>
-    @include('partials.nav')
-    <div class="d-flex flex-column justify-content-between h-screen">
-        @include('partials.session-status')
-        <main>
-            @yield('content')
-        </main>
+    <div id="app">
+        @include('partials.nav')
+        <div class="d-flex flex-column justify-content-between h-screen">
+            @include('partials.session-status')
+            <main>
+                @yield('content')
+            </main>
 
-        <footer class="bg-white text-center text-black-50 py-3 shadow">
-            {{config('app.name')}} | {{date('Y')}}
-        </footer>
+            <footer class="bg-white text-center text-black-50 py-3 shadow">
+                {{config('app.name')}} | {{date('Y')}}
+            </footer>
+        </div>
     </div>
 
 </body>
