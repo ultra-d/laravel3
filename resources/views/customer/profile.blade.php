@@ -26,7 +26,7 @@
         <div class="card-body p-0">
             <!-- Billing history table-->
             <div class="table-responsive table-billing-history">
-                <table class="table mb-0">
+                <table class="table mb-0" aria-describedby="billingtable">
                     <thead>
                         <tr>
                             <th class="border-gray-200" scope="col">Transaction ID</th>
