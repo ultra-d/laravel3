@@ -1,3 +1,5 @@
+<link rel="stylesheet" 
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <nav class="navbar navbar-light navbar-expand-lg bg-white shadow-sm">
 	<div class="container">
 		<a class="navbar-brand nav-link" 
@@ -30,6 +32,10 @@
 			@endauth
 		</ul>
 		<ul class="nav ms-auto">
+			{{-- CART COUNT--}}
+			<cart-button :content='@json(Cart::content()->values())' :cart-count='{{ Cart::count() }}'></cart-button>
+			{{--CART NAV END--}}
+
 			@can('is-admin')
 			<li class="nav-item float-right{{ setActive('admin.users.index') }}">
 				<a class="nav-link" href="{{ route('admin.users.index') }}">{{ __('titles.Admin') }}</a>
@@ -37,7 +43,8 @@
 			@endcan
 
 			@auth
-			<li class="nav-item dropdown">
+			{{--OLD LOGOUT DROPDOWN --}}
+			{{-- <li class="nav-item dropdown">
 				<a id="navbarDropdown" 
 				class="nav-link dropdown-toggle" 
 				href="#" role="button" 
@@ -52,9 +59,32 @@
 					<form class="dropdown-item" action="{{ route('logout') }}" method="POST">
 						@csrf
 						<button class="border-0 bg-white">{{__('form.button.logout')}}</button>
-					</form>               
+					</form>             
 				</div>
-			</li>
+			</li> --}}
+			{{-- END OLD --}}
+			
+			{{-- TEST DROPDOWN --}}
+			<div class="dropdown">
+				<a class="nav-link dropdown-toggle" 
+				id="navbarDropdown"
+				role="button" 
+				data-bs-toggle="dropdown" 
+				aria-expanded="false">
+				{{__('form.users.hi')}}, {{ auth()->user()->name }}!
+				</a>
+			
+				<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+					<form class="dropdown-item" action="{{ route('logout') }}" method="POST">
+						@csrf
+						<button class="border-0 bg-white">{{__('form.button.logout')}}</button>
+					</form> 
+					
+					<li><a class="dropdown-item" href="{{ route('customer.profile.index') }}">Perfil</a></li>
+				</ul>
+			</div>
+
+			{{-- DROPDOWN TEST ENDS --}}
 			@else
 			<li class="nav-item">
 				<a class="nav-link" href="{{ route('login') }}">{{ __('form.button.login') }}</a>
