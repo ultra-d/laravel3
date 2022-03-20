@@ -34,17 +34,5 @@ export default {
             this.products.push(data.product)
         })
     }
-
-   /*  0 => array:10 [▼
-    "rowId" => "8a48aa7c8e5202841ddaf767bb4d10da"
-    "id" => 6
-    "name" => "Juan Valdez Cafe"
-    "qty" => 1
-    "price" => 100.0
-    "weight" => 0.0
-    "options" => []
-    "discount" => 0.0
-    "tax" => 21.0
-    "subtotal" => 100.0] */
 }
 </script>
