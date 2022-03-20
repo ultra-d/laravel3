@@ -80,19 +80,6 @@
 					<span class="badge bg-secondary">
 						{{ $product->category ? $product->category->name : '' }}
 					</span>
-					
-					{{-- ADD TO CART ACTION / CART BUTTON--}}
-					{{-- <form action="{{ route('shop.cart.store')}} " method="POST">
-						@csrf
-						<input type="hidden" name="product_id" value="{{ $product->id}}">
-						<input type="number" name="quantity" value="1" min="1" max="{{ $product->quantity }}"
-								class="text-sm sm:text-base px-2 pr-2 rounded-lg border 
-								border-gray-400 py-1 focus:outline-none focus:border-blue-300"
-								style="width: 50px">
-
-						<button type="submit" class="btn border btn-sm fa fa-shopping-cart"> Agregar</button>
-					</form> --}}
-					{{--ADD CART BUTTON END--}}
 					<add-product-button :product='@json($product)'></add-product-button>
 				</div>
 			</div>

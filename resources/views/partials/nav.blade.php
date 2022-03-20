@@ -32,9 +32,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome
 			@endauth
 		</ul>
 		<ul class="nav ms-auto">
-			{{-- CART COUNT--}}
 			<cart-button :content='@json(Cart::content()->values())' :cart-count='{{ Cart::count() }}'></cart-button>
-			{{--CART NAV END--}}
 
 			@can('is-admin')
 			<li class="nav-item float-right{{ setActive('admin.users.index') }}">
@@ -43,28 +41,6 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome
 			@endcan
 
 			@auth
-			{{--OLD LOGOUT DROPDOWN --}}
-			{{-- <li class="nav-item dropdown">
-				<a id="navbarDropdown" 
-				class="nav-link dropdown-toggle" 
-				href="#" role="button" 
-				data-bs-toggle="dropdown" 
-				aria-haspopup="true" 
-				aria-expanded="false" v-pre>
-				{{__('form.users.hi')}}, {{ auth()->user()->name }}!
-				</a>
-
-				<div class="dropdown-menu dropdown-menu-right" 
-					aria-labelledby="navbarDropdown">
-					<form class="dropdown-item" action="{{ route('logout') }}" method="POST">
-						@csrf
-						<button class="border-0 bg-white">{{__('form.button.logout')}}</button>
-					</form>             
-				</div>
-			</li> --}}
-			{{-- END OLD --}}
-			
-			{{-- TEST DROPDOWN --}}
 			<div class="dropdown">
 				<a class="nav-link dropdown-toggle" 
 				id="navbarDropdown"
@@ -84,7 +60,6 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome
 				</ul>
 			</div>
 
-			{{-- DROPDOWN TEST ENDS --}}
 			@else
 			<li class="nav-item">
 				<a class="nav-link" href="{{ route('login') }}">{{ __('form.button.login') }}</a>
