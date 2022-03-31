@@ -1,8 +1,9 @@
 <?php
 
-use App\Http\Controllers\Customer\CustomerController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Shop\CartController;
+use App\Http\Controllers\Shop\PaymentController;
+use App\Http\Controllers\Customer\CustomerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,8 +29,11 @@ Route::post('/contact', 'App\Http\Controllers\MessageController@store')->name('m
 
 //Cart Route
 Route::post('/cart', [CartController::class, 'store'])->name('shop.cart.store');
-Route::get('/cart', [CartController::class, 'index'])->name('shop.cart.index');
+Route::get('/cart', [CartController::class, 'index'])->name('shop.cart.index')->middleware(['auth', 'verified']);
 Route::delete('/cart/{cart}', [CartController::class, 'destroy'])->name('shop.cart.destroy');
+
+Route::post('/payment/session', [PaymentController::class, 'createSession'])
+    ->name('payment.create.session');
 
 //Customer Route
 Route::get('/profile', [CustomerController::class, 'index'])->name('customer.profile.index');
