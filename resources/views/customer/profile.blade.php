@@ -4,22 +4,7 @@
 
 @section('content')
 
-<div class="container-xl px-4 mt-4">
-    <hr class="mt-0 mb-4">
-    <div class="row">
-        <div class="col-lg-4 mb-4">
-            <!-- Billing card 1-->
-            <div class="card h-100 border-start-lg border-start-primary">
-                <div class="card-body">
-                    <div class="small text-muted">Last item buyed</div>
-                    <div class="h3">title of item</div>
-                    <a class="text-arrow-icon small" href="#!">
-                        lest see the item
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
+<div class="container-xl px-4 mt-4"> 
     <!-- Billing history card-->
     <div class="card mb-4">
         <div class="card-header">Billing History</div>
@@ -32,34 +17,44 @@
                             <th class="border-gray-200" scope="col">Transaction ID</th>
                             <th class="border-gray-200" scope="col">Date</th>
                             <th class="border-gray-200" scope="col">Amount</th>
+                            <th class="border-gray-200" scope="col">Url</th>
                             <th class="border-gray-200" scope="col">Status</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>#39201</td>
-                            <td>06/15/2021</td>
-                            <td>$29.99</td>
-                            <td><span class="badge bg-light text-dark">Pending</span></td>
-                        </tr>
-                        <tr>
-                            <td>#38594</td>
-                            <td>05/15/2021</td>
-                            <td>$29.99</td>
-                            <td><span class="badge bg-success">Paid</span></td>
-                        </tr>
-                        <tr>
-                            <td>#38223</td>
-                            <td>04/15/2021</td>
-                            <td>$29.99</td>
-                            <td><span class="badge bg-success">Paid</span></td>
-                        </tr>
-                        <tr>
-                            <td>#38125</td>
-                            <td>03/15/2021</td>
-                            <td>$29.99</td>
-                            <td><span class="badge bg-success">Paid</span></td>
-                        </tr>
+                        @foreach($invoices as $invoice)
+                            <tr>
+                                <td>{{ Str::upper($invoice->reference) }}</td>
+                                <td>{{ $invoice->created_at->format('d-m-Y')}}</td>
+                                <td>${{ $invoice->total }}</td>
+                                <td>{{ $invoice->payment_url }}</td>
+                                <td>
+                                    @if ($invoice->payment_status == 'APPROVED')
+                                        <button class="btn btn-success btn-sm">
+                                            <span>
+                                                {{ $invoice->payment_status}}
+                                            </span>
+                                        </button>
+                                    @elseif ($invoice->payment_status == 'PENDING')
+                                        <form action="{{ $invoice->payment_url }}">
+                                            <button type="submit" 
+                                            class="btn btn-warning btn-sm"
+                                            value="{{ $invoice->payment_status}}">
+                                            {{ $invoice->payment_status}}
+                                            </button>
+                                        </form>
+                                    @else
+                                        <form action="{{ $invoice->payment_url }}">
+                                            <button type="submit" 
+                                            class="btn btn-danger btn-sm"
+                                            value="{{ $invoice->payment_status}}">
+                                            {{ $invoice->payment_status}}
+                                            </button>
+                                        </form>
+                                    @endif
+                                </td>
+                            </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>

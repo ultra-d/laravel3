@@ -32,7 +32,7 @@ class CartController extends Controller
             '0',
             ['max' => $product->quantity]
         );
-         
+        
         return response()->json(['cartItem' => $cartItem]);
     }
 
