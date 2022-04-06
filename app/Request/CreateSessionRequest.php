@@ -17,7 +17,7 @@ class CreateSessionRequest extends GetInformationRequest
         $this->buyer = $data['buyer'];
         $this->payment = $this->getPayment($data['payment']);
         $this->expiration = $this->getExpiration();
-        $this->returnUrl = $this->getReturnUrl();
+        $this->returnUrl = $data['payment']['redirectUrl'];
     }
     public static function url(?int $session_id = null): string
     {
@@ -52,10 +52,5 @@ class CreateSessionRequest extends GetInformationRequest
     public function getExpiration()
     {
         return date('c', strtotime('+2 days'));
-    }
-
-    public function getReturnUrl()
-    {
-        return route('customer.profile.index');
     }
 }
