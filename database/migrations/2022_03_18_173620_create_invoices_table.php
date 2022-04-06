@@ -16,10 +16,9 @@ class CreateInvoicesTable extends Migration
         Schema::create('invoices', function (Blueprint $table) {
             $table->id();
             $table->char('reference');
-            $table->unsignedBigInteger('payment_reference');
-            $table->char('payment_url');
-            //$table->unsignedBigInteger('value');
-            //$table->integer('taxes');
+            $table->string('payment_status')->nullable();
+            $table->unsignedBigInteger('payment_reference')->nullable();
+            $table->string('payment_url', 100)->nullable();
             $table->unsignedBigInteger('total');
             $table->foreignId('user_id')->constrained();
             $table->timestamps();

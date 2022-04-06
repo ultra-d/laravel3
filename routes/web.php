@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Shop\CartController;
 use App\Http\Controllers\Shop\PaymentController;
+use App\Http\Controllers\Customer\InvoiceController;
 use App\Http\Controllers\Customer\CustomerController;
 
 /*
@@ -35,5 +36,11 @@ Route::delete('/cart/{cart}', [CartController::class, 'destroy'])->name('shop.ca
 Route::post('/payment/session', [PaymentController::class, 'createSession'])
     ->name('payment.create.session');
 
+Route::get('/invoices/{reference}', [InvoiceController::class, 'show'])->name('customer.invoices.show')
+    ->middleware(['auth', 'verified']);
+Route::get('/invoices', [InvoiceController::class, 'index'])->name('customer.invoices.index')
+    ->middleware(['auth', 'verified']);
+
 //Customer Route
-Route::get('/profile', [CustomerController::class, 'index'])->name('customer.profile.index');
+Route::get('/profile', [CustomerController::class, 'index'])->name('customer.profile.index')
+    ->middleware(['auth', 'verified']);
