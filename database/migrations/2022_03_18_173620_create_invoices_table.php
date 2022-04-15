@@ -1,8 +1,9 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
+use App\Constants\PaymentStatus;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
 class CreateInvoicesTable extends Migration
 {
@@ -16,7 +17,7 @@ class CreateInvoicesTable extends Migration
         Schema::create('invoices', function (Blueprint $table) {
             $table->id();
             $table->char('reference');
-            $table->string('payment_status')->nullable();
+            $table->enum('payment_status', (new PaymentStatus())->toArray())->default(PaymentStatus::PENDING);
             $table->unsignedBigInteger('payment_reference')->nullable();
             $table->string('payment_url', 100)->nullable();
             $table->unsignedBigInteger('total');
