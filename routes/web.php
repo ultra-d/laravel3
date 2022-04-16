@@ -32,9 +32,9 @@ Route::post('/contact', 'App\Http\Controllers\MessageController@store')->name('m
 Route::post('/cart', [CartController::class, 'store'])->name('shop.cart.store');
 Route::get('/cart', [CartController::class, 'index'])->name('shop.cart.index')->middleware(['auth', 'verified']);
 Route::delete('/cart/{cart}', [CartController::class, 'destroy'])->name('shop.cart.destroy');
+Route::post('/cart/checkout', [CartController::class, 'checkoutSession'])
+    ->name('shop.cart.checkout');
 
-Route::post('/payment/session', [PaymentController::class, 'createSession'])
-    ->name('payment.create.session');
 
 Route::get('/invoices/{reference}', [InvoiceController::class, 'show'])->name('customer.invoices.show')
     ->middleware(['auth', 'verified']);
