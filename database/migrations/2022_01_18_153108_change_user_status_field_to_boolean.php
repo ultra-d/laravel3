@@ -13,7 +13,7 @@ class ChangeUserStatusFieldToBoolean extends Migration
         });
     }
 
-    public function down():void
+    public function down(): void
     {
         Schema::table('users', function (Blueprint $table) {
             $table->integer('status')->default(1)->change();

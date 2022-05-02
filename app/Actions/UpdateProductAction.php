@@ -3,7 +3,6 @@
 namespace App\Actions;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Actions\ActionContract;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 

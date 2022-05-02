@@ -2,18 +2,18 @@
 
 namespace App\Http\Controllers\Shop;
 
-use App\Models\User;
+use App\Http\Controllers\Controller;
 use App\Models\Invoice;
 use App\Models\Product;
-use Illuminate\View\View;
-use Illuminate\Support\Str;
-use Illuminate\Http\Request;
-use Illuminate\Http\JsonResponse;
-use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Http;
+use App\Models\User;
 use App\Request\CreateSessionRequest;
-use Illuminate\Http\RedirectResponse;
 use Gloudemans\Shoppingcart\Facades\Cart;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Str;
+use Illuminate\View\View;
 
 class CartController extends Controller
 {
@@ -21,9 +21,10 @@ class CartController extends Controller
     {
         return view('cart-checkout', [
             'cart' => Cart::content(),
-            'user' => User::pluck('name')
+            'user' => User::pluck('name'),
         ]);
     }
+
     public function store(Request $request): JsonResponse
     {
         $product = Product::findOrFail($request->input('product_id'));
@@ -35,13 +36,14 @@ class CartController extends Controller
             '0',
             ['max' => $product->quantity]
         );
-        
+
         return response()->json(['cartItem' => $cartItem]);
     }
 
     public function destroy($rowId): RedirectResponse
     {
         Cart::remove($rowId);
+
         return redirect()->route('shop.cart.index')->with('status', __('messages.success.product_deleted'));
     }
 
@@ -52,13 +54,13 @@ class CartController extends Controller
         $invoice->total = Cart::total(2, ".", "");
         $invoice->user_id = auth()->user()->id;
         $invoice->save();
-        
+
         //pivot table data
         foreach (Cart::content() as $product) {
             $invoice->products()->attach($product->id, [
                 'quantity' => $product->qty,
                 'price' => $product->price,
-                'subtotal' => $product->price * $product->qty
+                'subtotal' => $product->price * $product->qty,
             ]);
         }
 
@@ -70,7 +72,7 @@ class CartController extends Controller
         //dd($data);
         $response = Http::post(CreateSessionRequest::url(), $session->toArray());
         //dd($response->json());
-        
+
         if ($response->ok()) {
             Cart::destroy();
             $responseData = $response->json();
@@ -78,9 +80,11 @@ class CartController extends Controller
                 $invoice->payment_reference = $responseData['requestId'];
                 $invoice->payment_url = $responseData['processUrl'];
                 $invoice->save();
+
                 return redirect()->away($responseData['processUrl']);
             }
         }
+
         return redirect()->route('shop.cart.index')->with('message', 'algo salió mal');
     }
 }

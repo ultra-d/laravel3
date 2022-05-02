@@ -24,7 +24,7 @@ class CreateCategoriesTable extends Migration
             ->onDelete('set null');
         });
     }
-    
+
     public function down(): void
     {
         Schema::table('products', function (Blueprint $table) {

@@ -3,13 +3,9 @@
 namespace App\Http\Controllers\Customer;
 
 use App\Actions\GetInvoiceInformation;
+use App\Http\Controllers\Controller;
 use App\Models\Invoice;
 use Illuminate\View\View;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Http;
-use App\Request\GetInformationRequest;
-use Gloudemans\Shoppingcart\Facades\Cart;
 
 class InvoiceController extends Controller
 {
@@ -20,7 +16,7 @@ class InvoiceController extends Controller
             ->with('products')
             ->first();
         $invoiceConnect->execute($invoice);
-        
+
         return view('customer.invoice')->with(['invoice' => $invoice]);
     }
 }

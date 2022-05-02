@@ -2,13 +2,11 @@
 
 namespace App\Models;
 
-use App\Models\Invoice;
-use App\Models\Category;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Product extends Model
 {
@@ -45,6 +43,7 @@ class Product extends Model
     {
         return $this->belongsToMany(Invoice::class);
     }
+
     //query scope
     public function scopeTitle($query, $title)
     {

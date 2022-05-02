@@ -2,17 +2,16 @@
 
 namespace App\Http\Controllers\Admin;
 
-//use DB;
-use App\Models\Product;
-use App\Models\Image;
-use App\Models\Category;
-use App\Actions\UpdateProductAction;
 use App\Actions\StoreUpdateProductImagesAction;
-use Illuminate\Support\Facades\Storage;
+use App\Actions\UpdateProductAction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Product\SaveProductRequest;
-use Illuminate\Support\Str;
+use App\Models\Category;
+use App\Models\Image;
+use App\Models\Product;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use Illuminate\View\View;
 
 class ProductController extends Controller
@@ -20,16 +19,16 @@ class ProductController extends Controller
     public function index(): View
     {
         return view('admin.products.index', [
-            'products' => Product::latest()->paginate(8)
+            'products' => Product::latest()->paginate(8),
         ]);
     }
 
     public function create(): View
     {
         return view('admin.products.create', [
-            'product' => new Product,
-            'images' => new Image,
-            'categories' => Category::pluck('name', 'id')
+            'product' => new Product(),
+            'images' => new Image(),
+            'categories' => Category::pluck('name', 'id'),
         ]);
     }
 
@@ -42,14 +41,14 @@ class ProductController extends Controller
         $product->save();
 
         $imagesAction->execute($request->images, $product);
-        
+
         return redirect()->route('admin.products.index')->with('status', __('messages.success.product_created'));
     }
 
     public function show(Product $product): View
     {
         return view('admin.products.show', [
-            'product' => $product
+            'product' => $product,
         ]);
     }
 
@@ -57,7 +56,7 @@ class ProductController extends Controller
     {
         return view('admin.products.edit', [
             'product' => $product,
-            'categories' => Category::pluck('name', 'id')
+            'categories' => Category::pluck('name', 'id'),
         ]);
     }
 
@@ -70,7 +69,7 @@ class ProductController extends Controller
 
             $imagesAction->execute($request->images, $product);
         }
-    
+
         $action->execute($product, $request);
 
         return redirect()->route('admin.products.show', $product)
@@ -80,7 +79,7 @@ class ProductController extends Controller
     public function destroy(Product $product): RedirectResponse
     {
         $product->delete();
-    
+
         return redirect()->route('admin.products.index')->with('status', __('messages.success.product_deleted'));
     }
 }

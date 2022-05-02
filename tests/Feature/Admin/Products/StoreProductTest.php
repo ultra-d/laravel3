@@ -2,16 +2,14 @@
 
 namespace Tests\Feature\Admin\Products;
 
-use Tests\TestCase;
+use App\Models\Product;
 use App\Models\Role;
 use App\Models\User;
-use App\Models\Product;
-use Illuminate\Support\Arr;
 use Database\Seeders\RoleSeeder;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class StoreProductTest extends TestCase
 {
@@ -29,12 +27,12 @@ class StoreProductTest extends TestCase
     {
         $user = User::factory()->hasRoles(1, ['name' => 'Admin'])->create()->toArray();
         dd($user);
-        
+
         $response = $this->actingAs($user)->get(route('admin.products.store'));
         $response->assertViewIs('admin.products.index');
         $response->assertOk();
     }
-    
+
     public function test_it_stores_a_new_product(): void
     {
         $this->seed(RoleSeeder::class);
@@ -47,12 +45,12 @@ class StoreProductTest extends TestCase
         dd($user->roles());
         $response = $this->actingAs($user)->post(route('admin.products.store'), ['product' => $data]);
         dd($response);
-       
+
         $response->assertRedirect('/admin/products/show');
 
         $response->dump();
-     
     }
+
     public function testPrueba(): void
     {
         $data = Product::factory()->make()->toArray();
@@ -60,13 +58,13 @@ class StoreProductTest extends TestCase
         dd($file);
         /** @var \App\Models\User $user */
         $user = User::factory()->hasRoles(1, [
-                'name' => 'Editor'
+                'name' => 'Editor',
             ])->create();
-      
-        
+
+
         $response = $this->actingAs($user)
             ->post(route('admin.products.store'), ['product' => $data]);
-    
+
         $response->assertStatus(302);
         /* Storage::disk('image')->assertExists($file->hashName()); */
 
@@ -84,9 +82,8 @@ class StoreProductTest extends TestCase
             'price' => 200,
             'quantity' => 10,
             'images' => [
-                UploadedFile::fake()->image('product.jpg')->size(50)
+                UploadedFile::fake()->image('product.jpg')->size(50),
             ],
         ];
     }
-
 }

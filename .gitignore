@@ -15,3 +15,5 @@ yarn-error.log
 /.idea
 /.vscode
 .env.testing
+.php-cs-fixer.cache
+.DS_Store

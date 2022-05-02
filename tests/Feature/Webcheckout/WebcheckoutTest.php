@@ -2,10 +2,8 @@
 
 namespace Tests\Feature\Webcheckout;
 
-use App\Request\GetInformationRequest;
 use App\Request\CreateSessionRequest;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
+use App\Request\GetInformationRequest;
 use Tests\TestCase;
 
 class WebcheckoutTest extends TestCase
@@ -35,7 +33,7 @@ class WebcheckoutTest extends TestCase
         $this->assertArrayHasKey('nonce', $request['auth']);
         $this->assertArrayHasKey('seed', $request['auth']);
     }
-    
+
     private function getCreateSessionData(): array
     {
         return [
@@ -44,8 +42,8 @@ class WebcheckoutTest extends TestCase
                 'description' => 'conexion con webcheckout desde un test',
                 'amount' => [
                     'currency' => 'COP',
-                    'total' => '10000'
-                ]
+                    'total' => '10000',
+                ],
             ],
             'returnUrl' => route('customer.profile.index'),
             'expiration' => date('c', strtotime('+2 days')),

@@ -3,7 +3,6 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Str;
 
 class ProductFactory extends Factory
@@ -17,7 +16,7 @@ class ProductFactory extends Factory
             'price' => $this->faker->randomDigitNotZero(),
             'slug' => Str::slug($title),
             'quantity' => $this->faker->randomDigitNotZero(),
-            'description' => $this->faker->words(5, true)
+            'description' => $this->faker->words(5, true),
         ];
     }
 
@@ -29,5 +28,4 @@ class ProductFactory extends Factory
             ];
         });
     }
-        
 }

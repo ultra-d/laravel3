@@ -3,9 +3,9 @@
 namespace App\Actions;
 
 use App\Models\Invoice;
-use Illuminate\Support\Facades\Http;
 use App\Request\GetInformationRequest;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Http;
 
 class GetInvoiceInformation
 {
