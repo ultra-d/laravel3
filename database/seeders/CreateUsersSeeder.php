@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use App\Models\User;
+use Illuminate\Database\Seeder;
 
 class CreateUsersSeeder extends Seeder
 {
@@ -26,7 +26,7 @@ class CreateUsersSeeder extends Seeder
                 'password' => bcrypt('password'),
             ],
         ];
-        
+
         foreach ($user as $key => $value) {
             User::create($value);
         }

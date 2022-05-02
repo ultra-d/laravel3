@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Image;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Image;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Storage;
 
 class ImageController extends Controller
 {
@@ -15,7 +13,7 @@ class ImageController extends Controller
         $product = $image->product;
         $image->deleteFromDisk();
         $image->delete();
-        
+
         return redirect()->route('admin.products.edit', $product);
     }
 }

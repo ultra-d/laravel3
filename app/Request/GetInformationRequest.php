@@ -22,8 +22,8 @@ class GetInformationRequest implements WebcheckoutRequestContract
                 'login' => config('webcheckout.login'),
                 'tranKey' => $trankey,
                 'nonce' => base64_encode($nonce),
-                'seed' => $seed
-            ]
+                'seed' => $seed,
+            ],
         ];
     }
 

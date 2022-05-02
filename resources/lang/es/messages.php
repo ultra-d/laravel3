@@ -16,5 +16,5 @@ return [
         'product_updated' => 'El producto fue actualizado exitosamente.',
         'product_deleted' => 'El producto fue eliminado exitosamente.',
         'product_created' => 'El producto fue creado exitosamente.',
-    ]
+    ],
 ];

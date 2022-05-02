@@ -2,10 +2,10 @@
 
 namespace App\Services;
 
-use GuzzleHttp\Client;
-use App\Request\CreateSessionRequest;
 use App\Contracts\WebcheckoutContract;
+use App\Request\CreateSessionRequest;
 use App\Request\GetInformationRequest;
+use GuzzleHttp\Client;
 
 class WebcheckoutService implements WebcheckoutContract
 {
@@ -21,6 +21,7 @@ class WebcheckoutService implements WebcheckoutContract
         $getInformation = new GetInformationRequest();
         $data = $getInformation->auth();
         $url = $getInformation::url($session_id);
+
         return $this->request($data, $url);
     }
 
@@ -30,6 +31,7 @@ class WebcheckoutService implements WebcheckoutContract
 
         $data = $createSessionRequest->toArray();
         $url = $createSessionRequest::url(null);
+
         return $this->request($data, $url);
     }
 
@@ -37,9 +39,10 @@ class WebcheckoutService implements WebcheckoutContract
     {
         $response = $this->client->request('post', $url, [
             'json' => $data,
-            'verify' => false
+            'verify' => false,
         ]);
         $content = $response->getBody()->getContents();
+
         return json_decode($content, true);
     }
 }

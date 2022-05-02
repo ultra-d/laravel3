@@ -52,5 +52,5 @@ return [
         'logout' => 'Cerrar Sesión',
         'register' => 'Registrarse',
         'click' => 'Click Aquí',
-    ]
+    ],
 ];

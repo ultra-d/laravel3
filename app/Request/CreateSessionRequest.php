@@ -2,7 +2,6 @@
 
 namespace App\Request;
 
-use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 
 class CreateSessionRequest extends GetInformationRequest
@@ -19,6 +18,7 @@ class CreateSessionRequest extends GetInformationRequest
         $this->expiration = $this->getExpiration();
         $this->returnUrl = $data['payment']['redirectUrl'];
     }
+
     public static function url(?int $session_id = null): string
     {
         return config('webcheckout.url').'/api/session/';
@@ -33,7 +33,7 @@ class CreateSessionRequest extends GetInformationRequest
             'expiration' => $this->expiration,
             'returnUrl' => $this->returnUrl,
             'ipAddress' => app(Request::class)->getClientIp(),
-            'userAgent' => substr(app(Request::class)->header('User-Agent'), 0, 255)
+            'userAgent' => substr(app(Request::class)->header('User-Agent'), 0, 255),
         ]);
     }
 
@@ -44,8 +44,8 @@ class CreateSessionRequest extends GetInformationRequest
             'description' => 'Pago con referencia numero '. $data['reference'],
             'amount' => [
                 'currency' => 'COP',
-                'total' => $data['total']
-            ]
+                'total' => $data['total'],
+            ],
         ];
     }
 

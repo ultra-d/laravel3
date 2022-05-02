@@ -8,6 +8,7 @@ use PHPUnit\Framework\TestCase;
 class ExampleTest extends TestCase
 {
     use RefreshDatabase;
+
     /**
      * A basic unit test example.
      *

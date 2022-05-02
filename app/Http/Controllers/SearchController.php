@@ -2,22 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Product;
 use App\Models\Category;
-use Illuminate\View\View;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use App\Models\Product;
 use Gloudemans\Shoppingcart\Facades\Cart;
+use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class SearchController extends Controller
 {
     public function index(): View
     {
         $cart = Cart::content();
+
         return view('landing-menu', [
             'products' => Product::latest()->with('category')->paginate(8),
             'categories' => Category::pluck('id', 'name'),
-            $cart
+            $cart,
         ]);
     }
 
@@ -35,7 +35,7 @@ class SearchController extends Controller
 
         return view('landing-menu', [
             'products' => $products,
-            'categories' => Category::pluck('id', 'name')
+            'categories' => Category::pluck('id', 'name'),
         ]);
     }
 }

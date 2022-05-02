@@ -53,5 +53,5 @@ return [
         'logout' => 'Logout',
         'register' => 'Register',
         'click' => 'Click Here',
-    ]
+    ],
 ];

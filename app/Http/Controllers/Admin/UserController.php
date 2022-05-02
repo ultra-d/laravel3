@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests\User\UpdateUserRequest;
 use App\Http\Controllers\Controller;
-use Illuminate\Contracts\View\View;
-use Illuminate\Support\Facades\Gate;
-use App\Models\User;
+use App\Http\Requests\User\UpdateUserRequest;
 use App\Models\Role;
+use App\Models\User;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 
 class UserController extends Controller
@@ -19,12 +18,11 @@ class UserController extends Controller
 
     public function create(): View
     {
-        return view('admin.users.create', ['roles' => Role::all(), 'user' => new User]);
+        return view('admin.users.create', ['roles' => Role::all(), 'user' => new User()]);
     }
 
     public function store(UpdateUserRequest $request): RedirectResponse
     {
-
         $user = User::create($request->only(['name', 'email', 'password']));
 
         $user->roles()->sync($request->roles);
@@ -36,7 +34,7 @@ class UserController extends Controller
     {
         return view('admin.users.edit', [
             'roles' => Role::all(),
-            'user' => User::find($id)
+            'user' => User::find($id),
         ]);
     }
 
