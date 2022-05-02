@@ -55,7 +55,7 @@
             <!-- Buyer billing payment data  -->
             <div class="col-md-7 col-lg-8">
                 <h4 class="mb-3">Billing address</h4>
-                <form class="needs-validation" action="{{route('payment.create.session')}}" method="post" novalidate>
+                <form class="needs-validation" action="{{route('shop.cart.checkout')}}" method="post" novalidate>
                     @csrf
                     <div class="row g-3">
 

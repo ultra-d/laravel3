@@ -2,14 +2,16 @@
 
 namespace Tests\Feature\Admin\Products;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Http\UploadedFile;
-use Illuminate\Support\Arr;
-use App\Models\Product;
-use App\Models\User;
 use Tests\TestCase;
+use App\Models\Role;
+use App\Models\User;
+use App\Models\Product;
+use Illuminate\Support\Arr;
+use Database\Seeders\RoleSeeder;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class StoreProductTest extends TestCase
 {
@@ -25,7 +27,9 @@ class StoreProductTest extends TestCase
 
     public function test_create_product_view_can_be_rendered(): void
     {
-        $user = User::factory()->hasRoles(1, ['name' => 'Admin'])->create();
+        $user = User::factory()->hasRoles(1, ['name' => 'Admin'])->create()->toArray();
+        dd($user);
+        
         $response = $this->actingAs($user)->get(route('admin.products.store'));
         $response->assertViewIs('admin.products.index');
         $response->assertOk();
@@ -33,12 +37,40 @@ class StoreProductTest extends TestCase
     
     public function test_it_stores_a_new_product(): void
     {
-        /* $this->withoutExceptionHandling(); */
-        $data = $this->productData();
-        $user = User::factory()->hasRoles(1, ['name' => 'Admin'])->create();
+        $this->seed(RoleSeeder::class);
+        $role = Role::where('name', 'admin')->first();
+        $data = Product::factory()->make()->toArray();
+        $data['images'][] = UploadedFile::fake()->image('product.jpg')->size(50);
+        /** @var \App\Models\User $user */
+        $user = User::factory()->create();
+        $user->roles()->attach($role);
+        dd($user->roles());
         $response = $this->actingAs($user)->post(route('admin.products.store'), ['product' => $data]);
+        dd($response);
        
-        /* $response->assertRedirect('/admin/products/show'); */
+        $response->assertRedirect('/admin/products/show');
+
+        $response->dump();
+     
+    }
+    public function testPrueba(): void
+    {
+        $data = Product::factory()->make()->toArray();
+        $file = $data['images'][] = UploadedFile::fake()->image('product.jpg')->size(50);
+        dd($file);
+        /** @var \App\Models\User $user */
+        $user = User::factory()->hasRoles(1, [
+                'name' => 'Editor'
+            ])->create();
+      
+        
+        $response = $this->actingAs($user)
+            ->post(route('admin.products.store'), ['product' => $data]);
+    
+        $response->assertStatus(302);
+        /* Storage::disk('image')->assertExists($file->hashName()); */
+
+        $response->dump();
     }
 
     private function productData(): array
@@ -56,4 +88,5 @@ class StoreProductTest extends TestCase
             ],
         ];
     }
+
 }

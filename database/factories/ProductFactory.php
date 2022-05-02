@@ -17,8 +17,17 @@ class ProductFactory extends Factory
             'price' => $this->faker->randomDigitNotZero(),
             'slug' => Str::slug($title),
             'quantity' => $this->faker->randomDigitNotZero(),
-            'description' => $this->faker->words(5, true),
-            'status' => true,
+            'description' => $this->faker->words(5, true)
         ];
     }
+
+    public function enabled()
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'status' => true,
+            ];
+        });
+    }
+        
 }

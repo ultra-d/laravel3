@@ -2,15 +2,16 @@
 
 namespace App\Models;
 
+use App\Models\Role;
 use App\Models\Invoice;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -21,7 +22,7 @@ class User extends Authenticatable implements MustVerifyEmail
      *
      * @var array<int, string>
      */
-    protected $fillable = [ // pendiente averiguar bien
+    protected $fillable = [
         'name',
         'email',
         'password',
@@ -56,7 +57,8 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function roles()
     {
-        return $this->belongsToMany('App\Models\Role');
+        /* return $this->belongsToMany('App\Models\Role'); */
+        return $this->belongsToMany(Role::class);
     }
 
     public function hasAnyRole(string $role)
