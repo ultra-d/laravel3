@@ -2,16 +2,17 @@
 
 namespace Tests\Feature\Admin\Products;
 
-use App\Models\Product;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Http\UploadedFile;
 use Tests\TestCase;
+use App\Models\User;
+use App\Models\Product;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class DeleteProductTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_a_product_can_be_deleted(): void
+    public function testOneProductCanBeDeleted(): void
     {
         $product = Product::factory()->count(1)->make();
         $product = Product::first();
@@ -23,7 +24,7 @@ class DeleteProductTest extends TestCase
         $this->assertTrue(true);
     }
 
-    /* public function an_admin_can_delete_a_product()
+    /* public function test_an_admin_can_delete_a_product()
     {
         $this->assertDatabaseHas('products', ['title'=> $this->product->title]);
 
@@ -34,6 +35,25 @@ class DeleteProductTest extends TestCase
         $this->assertDeleted('products', array($this->product));
     }
  */
+    public function testAnAdminCanDeleteProducts()
+    {
+        $data = Product::factory()->make()->toArray();
+
+        $data['images'][] = UploadedFile::fake()->image('product.jpg')->size(50);
+        
+        $user = User::factory()->hasRoles(1, [
+            'name' => 'Admin',
+            ])->create();
+            
+        $this->actingAs($user)
+            ->post(route('admin.products.store'), $data);
+            
+        $this->actingAs($user)
+            ->delete(route('admin.products.destroy'), $data->id)
+            ->assertStatus(302)
+            ->assertRedirect(route('admin.products.index'));
+    }
+
     private function productData(): array
     {
         return [
