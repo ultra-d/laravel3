@@ -1,9 +1,3 @@
-@extends('layout')
-
-@section('title', 'Customer Profile')
-
-@section('content')
-
 <div class="container-xl px-4 mt-4"> 
     <!-- Billing history card-->
     <div class="card mb-4">

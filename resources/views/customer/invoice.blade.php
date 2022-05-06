@@ -6,6 +6,7 @@
 
 <div class="container-xl px-4 mt-4">
     @if($invoice->payment_status == 'APPROVED')
+    @include('partials.invoice-data')    
         <div class="alert alert-success d-flex align-items-center" role="alert">
             <div>
             Su transacción fue realizada con éxito
@@ -17,7 +18,7 @@
             data-target="#myModal">
             ir a mi perfil
             <a>
-        </td>         
+        </td>
 
     @elseif ($invoice->payment_status == 'PENDING')
         <div class="alert alert-warning d-flex align-items-center" role="alert">
