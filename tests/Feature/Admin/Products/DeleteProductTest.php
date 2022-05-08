@@ -4,8 +4,10 @@ namespace Tests\Feature\Admin\Products;
 
 use Tests\TestCase;
 use App\Models\User;
+use App\Models\Image;
 use App\Models\Product;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class DeleteProductTest extends TestCase
@@ -37,21 +39,24 @@ class DeleteProductTest extends TestCase
  */
     public function testAnAdminCanDeleteProducts()
     {
-        $data = Product::factory()->make()->toArray();
-
-        $data['images'][] = UploadedFile::fake()->image('product.jpg')->size(50);
+        Storage::fake('image');
+        $image = Image::factory()->create();
+        $product = $image->product;
         
         $user = User::factory()->hasRoles(1, [
             'name' => 'Admin',
             ])->create();
             
         $this->actingAs($user)
-            ->post(route('admin.products.store'), $data);
-            
-        $this->actingAs($user)
-            ->delete(route('admin.products.destroy'), $data->id)
-            ->assertStatus(302)
+            ->delete(route('admin.products.destroy', $product))
             ->assertRedirect(route('admin.products.index'));
+        
+        $this->assertDatabaseMissing('products', [
+            'id' => $product->id,
+        ])->assertDatabaseMissing('images', [
+            'id' => $image->id,
+        ]);
+        Storage::disk('image')->assertMissing($product->id . '/' . $image->file_name);
     }
 
     private function productData(): array

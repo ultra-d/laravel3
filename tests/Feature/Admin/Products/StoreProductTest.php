@@ -33,6 +33,7 @@ class StoreProductTest extends TestCase
 
     public function testDataIsStoredInDatabase(): void
     {
+        Storage::fake('image');
         $data = Product::factory()->make()->toArray();
         $data['images'][] = UploadedFile::fake()->image('product.jpg')->size(50);
 
@@ -40,15 +41,18 @@ class StoreProductTest extends TestCase
                 'name' => 'Admin',
             ])->create();
 
-        $this->actingAs($user)
+        $response = $this->actingAs($user)
             ->post(route('admin.products.store'), $data);
+        //$response->dump()->dumpSession();
+        $response->assertSessionDoesntHaveErrors()
+            ->assertRedirect(route('admin.products.index'));
 
         $this->assertDatabaseHas('products', Arr::except($data, ['images']));
+        
+        $product = Product::latest('id')->with('images')->first();
+        $image = $product->images->first();
 
-        //sessionhaserrors
-
-        //Storage::fake('local');
-        //Storage::disk('local')->assertExists("images/1/{$data['images']->hashName()}");
+        Storage::disk('image')->assertExists($product->id . '/' . $image->file_name);
     }
 
     private function productData(): array
