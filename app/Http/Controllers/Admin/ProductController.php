@@ -78,6 +78,7 @@ class ProductController extends Controller
 
     public function destroy(Product $product): RedirectResponse
     {
+        Storage::disk('image')->deleteDirectory($product->id);
         $product->delete();
 
         return redirect()->route('admin.products.index')->with('status', __('messages.success.product_deleted'));
