@@ -2,8 +2,9 @@
 
 namespace Database\Factories;
 
-use Illuminate\Database\Eloquent\Factories\Factory;
+use App\Models\Category;
 use Illuminate\Support\Str;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
 class ProductFactory extends Factory
 {
@@ -11,7 +12,7 @@ class ProductFactory extends Factory
     {
         return [
             'code' => Str::random(10),
-            'category_id' => random_int(1, 2),
+            'category_id' => Category::factory()->create(),
             'title' => $title = $this->faker->words(2, true),
             'price' => $this->faker->randomDigitNotZero(),
             'slug' => Str::slug($title),
