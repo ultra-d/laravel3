@@ -11,6 +11,8 @@
 				<div class="d-flex justify-content-between align-items-center ">
 					<h1 id="mydesc" class="display-5 mb-0"> {{ __('titles.products_panel')}}</h1>
 					<a class="btn btn-primary btn-sm btn-success" href="{{ route('admin.products.create') }}" role="button">{{ __('form.products.create')}}</a>
+					<a class="btn btn-primary btn-sm btn-success" href="{{ route('admin.products.export') }}" role="button">Exportar Products</a>
+					<a class="btn btn-primary btn-sm btn-success" href="{{ route('admin.products.import') }}" role="button">Importar</a>
 				</div>
 				<br>
 				<table class="table" aria-describedby="mydesc">
