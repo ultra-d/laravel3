@@ -1,3 +1,8 @@
+@extends('layout')
+
+@section('title', 'invoice')
+
+@section('content')
 <div class="container-xl px-4 mt-4"> 
     <!-- Billing history card-->
     <div class="card mb-4">
@@ -50,7 +55,7 @@
                             </tr>
                         @endforeach
                     </tbody>
-                </table>
+                </table> 
             </div>
         </div>
     </div>
