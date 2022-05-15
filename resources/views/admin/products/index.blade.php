@@ -5,7 +5,7 @@
 @section('content')
 <div class="container py-3">
 	<div class="row">
-		<div class="col-12 col-sm-11 mx-auto"> 	
+		<div class="col-12 col-sm-11 mx-auto">
 			<div class="card">
 				<div class="d-flex justify-content-between align-items-center ">
 					<h1 id="mydesc" class="display-5 mb-0"> {{ trans('titles.products_panel')}}</h1>

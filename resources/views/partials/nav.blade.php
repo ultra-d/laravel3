@@ -11,7 +11,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome
 			data-bs-target="#navbarSupportedContent" 
 			aria-controls="navbarSupportedContent" 
 			aria-expanded="false" 
-			aria-label="{{ __('Toggle navigation') }}">
+			aria-label="{{ trans('Toggle navigation') }}">
 			<span class="navbar-toggler-icon"></span>
 		</button>
 	
@@ -19,15 +19,10 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome
 		<ul class="nav me-auto">
 			@auth
 			<li class="nav-item {{ setActive('products.*') }}">
-				<a class="nav-link" href="{{ url('/landing') }}">{{ __('Products') }}</a>
+				<a class="nav-link" href="{{ url('/landing') }}">{{ trans('Products') }}</a>
 			</li>
-			@can('is-admin')
-			<li class="nav-item {{ setActive('products.*') }}">
-				<a class="nav-link" href="{{ route('admin.products.index') }}">{{ __('titles.admin_products') }}</a>
-			</li>
-			@endcan
 			<li class="nav-item {{ setActive('contact')  }}">
-				<a class="nav-link" href="{{ route('contact') }}">{{ __('titles.Contact') }}</a>
+				<a class="nav-link" href="{{ route('contact') }}">{{ trans('titles.Contact') }}</a>
 			</li>
 			@endauth
 		</ul>
@@ -35,9 +30,32 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome
 			<cart-button :content='@json(Cart::content()->values())' :cart-count='{{ Cart::count() }}'></cart-button>
 
 			@can('is-admin')
-			<li class="nav-item float-right{{ setActive('admin.users.index') }}">
-				<a class="nav-link" href="{{ route('admin.users.index') }}">{{ __('titles.Admin') }}</a>
-			</li>
+			<div class="dropdown">
+				<a class="nav-link dropdown-toggle" 
+				id="navbarDropdown"
+				role="button" 
+				data-bs-toggle="dropdown" 
+				aria-expanded="false">
+				{{ trans('form.button.management') }}
+				</a>
+				<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+					<li>
+						<a class="nav-link dropdown-item" href="{{ route('admin.users.index') }}">{{ trans('titles.Admin') }}</a>
+					</li>
+					<li>
+						<a class="nav-link dropdown-item" href="{{ route('admin.products.index') }}">{{ trans('titles.admin_products') }}</a>
+					</li>
+					<li>
+						<a class="nav-link dropdown-item" href="{{ url('/admin/exports') }}">{{ trans('form.products.export_products') }}</a>
+					</li>
+					<li>
+						<a class="nav-link dropdown-item" href="{{ url('/admin/imports') }}">{{ trans('form.products.import_products') }}</a>
+					</li>
+					<li >
+						<a class="nav-link dropdown-item" href="{{ url('') }}">{{ trans('form.products.reports') }}</a>
+					</li>	
+				</ul>
+			</div>
 			@endcan
 
 			@auth
@@ -47,34 +65,34 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome
 				role="button" 
 				data-bs-toggle="dropdown" 
 				aria-expanded="false">
-				{{__('form.users.hi')}}, {{ auth()->user()->name }}!
+				{{ trans('form.users.hi')}}, {{ auth()->user()->name }}!
 				</a>
 			
 				<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
 					<form class="dropdown-item" action="{{ route('logout') }}" method="POST">
 						@csrf
-						<button class="border-0 bg-white">{{__('form.button.logout')}}</button>
+						<button class="border-0 bg-white">{{ trans('form.button.logout')}}</button>
 					</form> 
-					
-					<li><a class="dropdown-item" href="{{ route('customer.profile.index') }}">Perfil</a></li>
+					<li>
+						<a class="nav-link dropdown-item" href="{{ route('customer.profile.index') }}"> {{ trans('form.button.purchases') }} </a>
+					</li>
 				</ul>
 			</div>
 
 			@else
 			<li class="nav-item">
-				<a class="nav-link" href="{{ route('login') }}">{{ __('form.button.login') }}</a>
+				<a class="nav-link" href="{{ route('login') }}">{{ trans('form.button.login') }}</a>
 			</li>
-            
             
             @if (Route::has('register'))
 			<li class="nav-item">
-            	<a class="nav-link" href="{{ route('register') }}" >{{ __('form.button.register') }}</a>
+            	<a class="nav-link" href="{{ route('register') }}" >{{ trans('form.button.register') }}</a>
 			</li>
             @endif
             
             @if (Route::has('password.request'))
 			<li class="nav-item">
-            	<a class="nav-link" href="{{ route('password.request') }}">{{ __('messages.form.forgot_pass') }}</a>
+            	<a class="nav-link" href="{{ route('password.request') }}">{{ trans('messages.form.forgot_pass') }}</a>
 			</li>
             @endif
 			@endauth
