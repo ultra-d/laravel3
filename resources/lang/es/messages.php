@@ -18,4 +18,38 @@ return [
         'product_deleted' => 'El producto fue eliminado exitosamente.',
         'product_created' => 'El producto fue creado exitosamente.',
     ],
+    'importhasfailed' => [
+        'sorry' => 'Tu importe no pasó las validaciones, recuerda las reglas',
+        'category_id' => 'CATEGORY_ID = requerido/no nulo, numerico y tiene que existir:categories,id',
+        'code' => 'CODE = requerido/no nulo, tamaño:10 y tiene que ser UNICO',
+        'title' => 'TITLE = requerido/no nulo, texto, max:100 y tiene que ser UNICO',
+        'description' => 'DESCRIPTION = requerido/no nulo, texto, min:10, max:250',
+        'slug' => 'SLUG = requerido/no nulo, min:6, max:100 y tiene que ser UNICO',
+        'price' => 'PRICE = requerido/no nulo, entero, min:1',
+        'quantity' => 'QTY = requerido/no nulo, numerico, min:1',
+    ],
+    'exportready' => [
+        'ready' => 'Tu documento de Productos ha sido exportado con éxito',
+        'download' => 'Puedes decargarlo en el siguiente enlace -> ',
+        'day' => 'Buen día',
+    ],
+    'importready' => [
+        'ready' => 'El documento que importaste ha sido cargado con éxito',
+        'check' => 'Por favor dale un vistazo',
+    ],
+    'import' => [
+        'message' => 'Tu importe está siendo procesado.. por favor revisa tu bandeja de entrada',
+        'field' => 'Campo',
+        'requirements' => 'Requerimientos',
+        'category_id' => 'NO nulo, numerico y tiene que existir:categories,id',
+        'code' => 'NO nulo, tamaño:10 y tiene que ser UNICO',
+        'title' => 'NO nulo, texto, max:100 y tiene que ser UNICO',
+        'description' => 'NO nulo, texto, min:10, max:250',
+        'slug' => 'NO nulo, min:6, max:100 y tiene que ser UNICO',
+        'price' => 'NO nulo, entero, min:1',
+        'quantity' => 'NO nulo, numerico, min:1',
+    ],
+    'export' => [
+        'message' => 'Tu exporte ha empezado, te enviaremos un correo cuando haya finalizado!',
+    ],
 ];
