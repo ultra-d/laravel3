@@ -2,14 +2,20 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Actions\ExportProductAction;
+use App\Actions\ImportProductAction;
 use App\Actions\StoreUpdateProductImagesAction;
 use App\Actions\UpdateProductAction;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Product\ExportProductRequest;
 use App\Http\Requests\Product\SaveProductRequest;
+use App\Imports\Admin\ProductsImport;
+use App\Jobs\NotifyUserImportCompleted;
 use App\Models\Category;
 use App\Models\Image;
 use App\Models\Product;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\View\View;
@@ -19,7 +25,7 @@ class ProductController extends Controller
     public function index(): View
     {
         return view('admin.products.index', [
-            'products' => Product::latest()->paginate(8),
+            'products' => Product::withCount('invoices')->latest()->paginate(8),
         ]);
     }
 
@@ -42,7 +48,7 @@ class ProductController extends Controller
 
         $imagesAction->execute($request->images, $product);
 
-        return redirect()->route('admin.products.index')->with('status', __('messages.success.product_created'));
+        return redirect()->route('admin.products.index')->with('status', trans('messages.success.product_created'));
     }
 
     public function show(Product $product): View
@@ -73,14 +79,29 @@ class ProductController extends Controller
         $action->execute($product, $request);
 
         return redirect()->route('admin.products.show', $product)
-        ->with('status', __('messages.success.product_updated'));
+        ->with('status', trans('messages.success.product_updated'));
     }
 
     public function destroy(Product $product): RedirectResponse
     {
+        //$product->loadCount('invoices');
         Storage::disk('image')->deleteDirectory($product->id);
         $product->delete();
 
-        return redirect()->route('admin.products.index')->with('status', __('messages.success.product_deleted'));
+        return redirect()->route('admin.products.index')->with('status', trans('messages.success.product_deleted'));
+    }
+
+    public function export(ExportProductRequest $request, ExportProductAction $action): RedirectResponse
+    {
+        $action->execute($request);
+
+        return back()->withSuccess(trans('messages.export.message'));
+    }
+
+    public function import(Request $request, ImportProductAction $action)
+    {
+        $action->execute($request);
+
+        return back()->with('message', trans('messages.import.message'));
     }
 }

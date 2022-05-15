@@ -2,7 +2,11 @@
 
 <div class="mb-3">
 	<label for="files" class="form-label">Seleccionar imagenes</label>
-	<input name="images[]" class="form-control form-control-sm" id="files" type="file" multiple="multiple">
+	<input name="images[]" 
+		class="form-control form-control-sm" 
+		id="files" 
+		type="file" 
+		multiple="multiple">
 </div>
 
 <div class="form-group">

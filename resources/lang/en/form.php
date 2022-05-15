@@ -21,6 +21,19 @@ return [
         'manage' => 'Manage',
         'search' => 'Search',
         'search_p' => 'Search Products',
+        'custom_date' => 'Custom Date',
+        'export_products' => 'Export Products',
+        'from' => 'From',
+        'to' => 'To',
+        'status' => 'Status',
+        'export' => 'Export',
+        'enable_disable' => 'Enable & Disable',
+        'enable_status' => 'Enable',
+        'disable_status' => 'Disable',
+        'import_products' => 'Import Products',
+        'reports' => 'Reports',
+        'import' => 'Import',
+        'import_file' => 'Import File',
     ],
 
     'fields' => [
@@ -53,5 +66,7 @@ return [
         'logout' => 'Logout',
         'register' => 'Register',
         'click' => 'Click Here',
+        'management' => 'Management',
+        'purchases' => 'Purchases',
     ],
 ];
