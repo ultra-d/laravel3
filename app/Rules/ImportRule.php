@@ -2,31 +2,21 @@
 
 namespace App\Rules;
 
-use Illuminate\Contracts\Validation\Rule;
+use App\Contracts\ProductImportRuleContract;
+use Illuminate\Validation\Rule;
 
-class ImportRule implements Rule
+class ImportRule implements ProductImportRuleContract
 {
-    /**
-     * Create a new rule instance.
-     *
-     * @return void
-     */
-    public function __construct()
+    public static function toArray(): array
     {
-        //
-    }
-    public function passes($attribute, $value)
-    {
-        //
-    }
-
-    /**
-     * Get the validation error message.
-     *
-     * @return string
-     */
-    public function message()
-    {
-        return 'The validation error message.';
+        return [
+            'category_id' => ['required', 'numeric', 'exists:categories,id'],
+            'code' => ['required', 'size:10', Rule::unique('products', 'code')],
+            'title' => ['required', 'string', 'max:100', Rule::unique('products', 'title')],
+            'description' => ['required', 'string', 'min:10', 'max:250'],
+            'slug' => ['required', 'min:6', 'max:100', Rule::unique('products', 'slug')],
+            'price' => ['required', 'integer', 'min:1'],
+            'quantity' => ['required', 'numeric', 'min:1'],
+        ];
     }
 }
