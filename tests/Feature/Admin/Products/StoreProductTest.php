@@ -2,15 +2,13 @@
 
 namespace Tests\Feature\Admin\Products;
 
-use Tests\TestCase;
-use App\Models\Role;
-use App\Models\User;
 use App\Models\Product;
-use Illuminate\Support\Arr;
-use Database\Seeders\RoleSeeder;
-use Illuminate\Http\UploadedFile;
-use Illuminate\Support\Facades\Storage;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Storage;
+use Tests\TestCase;
 
 class StoreProductTest extends TestCase
 {
@@ -48,7 +46,7 @@ class StoreProductTest extends TestCase
             ->assertRedirect(route('admin.products.index'));
 
         $this->assertDatabaseHas('products', Arr::except($data, ['images']));
-        
+
         $product = Product::latest('id')->with('images')->first();
         $image = $product->images->first();
 

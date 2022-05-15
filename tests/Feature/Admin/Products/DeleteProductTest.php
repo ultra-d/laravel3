@@ -2,13 +2,13 @@
 
 namespace Tests\Feature\Admin\Products;
 
-use Tests\TestCase;
-use App\Models\User;
 use App\Models\Image;
 use App\Models\Product;
+use App\Models\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class DeleteProductTest extends TestCase
 {
@@ -42,15 +42,15 @@ class DeleteProductTest extends TestCase
         Storage::fake('image');
         $image = Image::factory()->create();
         $product = $image->product;
-        
+
         $user = User::factory()->hasRoles(1, [
             'name' => 'Admin',
             ])->create();
-            
+
         $this->actingAs($user)
             ->delete(route('admin.products.destroy', $product))
             ->assertRedirect(route('admin.products.index'));
-        
+
         $this->assertDatabaseMissing('products', [
             'id' => $product->id,
         ])->assertDatabaseMissing('images', [
