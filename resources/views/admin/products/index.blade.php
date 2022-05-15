@@ -7,6 +7,14 @@
 	<div class="row">
 		<div class="col-12 col-sm-11 mx-auto">
 			<div class="card">
+
+				@if (Session::has('message'))
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <p>{{ Session::get('message') }}</p>
+						<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                @endif
+
 				<div class="d-flex justify-content-between align-items-center ">
 					<h1 id="mydesc" class="display-5 mb-0"> {{ trans('titles.products_panel')}}</h1>
 					<a class="btn btn-primary btn-sm btn-success" href="{{ route('admin.products.create') }}" role="button">{{ trans('form.products.create')}}</a>
