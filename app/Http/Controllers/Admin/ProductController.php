@@ -84,11 +84,15 @@ class ProductController extends Controller
 
     public function destroy(Product $product): RedirectResponse
     {
-        //$product->loadCount('invoices');
-        Storage::disk('image')->deleteDirectory($product->id);
-        $product->delete();
+        if ($product->loadCount('invoices') !== 0) {
+            return redirect()->route('admin.products.index')->with('message', $product->title . ' ' .
+                trans('messages.alert.cannotdelete'));
+        } else {
+            Storage::disk('image')->deleteDirectory($product->id);
+            $product->delete();
 
-        return redirect()->route('admin.products.index')->with('status', trans('messages.success.product_deleted'));
+            return redirect()->route('admin.products.index')->with('status', trans('messages.success.product_deleted'));
+        }
     }
 
     public function export(ExportProductRequest $request, ExportProductAction $action): RedirectResponse

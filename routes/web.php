@@ -40,7 +40,6 @@ Route::get('/invoices/{reference}', [InvoiceController::class, 'show'])->name('c
     ->middleware(['auth', 'verified']);
 Route::get('/invoices', [InvoiceController::class, 'index'])->name('customer.invoices.index')
     ->middleware(['auth', 'verified']);
-
-//Customer Route
-Route::get('/profile', [CustomerController::class, 'index'])->name('customer.profile.index')
+//Invoice PDF
+Route::get('/pdf/{reference}', [InvoiceController::class, 'pdf'])->name('customer.invoices.pdf')
     ->middleware(['auth', 'verified']);

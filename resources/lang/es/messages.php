@@ -28,6 +28,9 @@ return [
         'price' => 'PRICE = requerido/no nulo, entero, min:1',
         'quantity' => 'QTY = requerido/no nulo, numerico, min:1',
     ],
+    'alert' => [
+        'cannotdelete' => 'No puede ser eliminado porque tiene una relación con una factura',
+    ],
     'exportready' => [
         'ready' => 'Tu documento de Productos ha sido exportado con éxito',
         'download' => 'Puedes decargarlo en el siguiente enlace -> ',
@@ -51,5 +54,10 @@ return [
     ],
     'export' => [
         'message' => 'Tu exporte ha empezado, te enviaremos un correo cuando haya finalizado!',
+    ],
+    'invoice_status' => [
+        'approved' => 'Tu transacción fue exitosa!',
+        'pending' => 'Algo salió mal con la transacción, quedará en estado pendiente por validar',
+        'failed' => 'Tu pago no pudo ser procesado',
     ],
 ];

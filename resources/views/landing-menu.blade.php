@@ -74,7 +74,7 @@
 				<h6 class="card-subtitle"> $ {{ $product->price}} </h6>
 				<br>
 				@if($product->status == false)
-				<p>*OUT OF STOCK*</p>
+				<p>*DISABLE*</p>
 				@endif
 				<div class="d-flex justify-content-between align-items-center">
 					<span class="badge bg-secondary">

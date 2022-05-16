@@ -15,4 +15,8 @@ return [
     'export_products' => 'Export Products',
     'import_products' => 'Import Products',
     'reports' => 'Reports',
+    'invoice_status' => 'Invoice Status',
+    'psummary' => 'Purchase Summary',
+    'invoices_summary' => 'Invoices Summary',
+    'billing_history' => 'Billing History',
 ];

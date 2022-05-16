@@ -18,10 +18,10 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 		<ul class="nav me-auto">
 			@auth
-			<li class="nav-item {{ setActive('products.*') }}">
+			<li class="nav-item">
 				<a class="nav-link" href="{{ url('/landing') }}">{{ trans('Products') }}</a>
 			</li>
-			<li class="nav-item {{ setActive('contact')  }}">
+			<li class="nav-item">
 				<a class="nav-link" href="{{ route('contact') }}">{{ trans('titles.Contact') }}</a>
 			</li>
 			@endauth
@@ -74,7 +74,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome
 						<button class="border-0 bg-white">{{ trans('form.button.logout')}}</button>
 					</form> 
 					<li>
-						<a class="nav-link dropdown-item" href="{{ route('customer.profile.index') }}"> {{ trans('form.button.purchases') }} </a>
+						<a class="nav-link dropdown-item" href="{{ route('customer.invoices.index') }}"> {{ trans('form.button.purchases') }} </a>
 					</li>
 				</ul>
 			</div>

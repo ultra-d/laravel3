@@ -15,4 +15,8 @@ return [
     'export_products' => 'Exportar Productos',
     'import_products' => 'Importar Productos',
     'reports' => 'Reportes',
+    'invoice_status' => 'Estado Compra',
+    'psummary' => 'Resumen de la compra',
+    'invoices_summary' => 'Resumen de Compras',
+    'billing_history' => 'Historial de Facturación',
 ];
