@@ -3,14 +3,13 @@
 namespace App\Console\Commands;
 
 use App\Actions\GetInvoiceInformation;
+use App\Constants\PaymentStatus;
 use App\Models\Invoice;
 use Illuminate\Console\Command;
-use App\Constants\PaymentStatus;
 use Illuminate\Support\Facades\Log;
 
 class ConsultInvoiceStatusCommand extends Command
 {
-
     protected $signature = 'get:status';
 
     protected $description = 'Get invoice status (PENDING) to APPROVE OR FAILED';

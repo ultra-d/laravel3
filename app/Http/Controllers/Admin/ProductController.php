@@ -2,23 +2,23 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Image;
-use App\Models\Product;
-use App\Models\Category;
-use Illuminate\View\View;
-use Illuminate\Support\Str;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 use App\Actions\ExportProductAction;
 use App\Actions\ImportProductAction;
+use App\Actions\StoreUpdateProductImagesAction;
 use App\Actions\UpdateProductAction;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Storage;
-use App\Actions\StoreUpdateProductImagesAction;
-use App\Http\Requests\Product\SaveProductRequest;
 use App\Http\Requests\Product\ExportProductRequest;
+use App\Http\Requests\Product\SaveProductRequest;
+use App\Models\Category;
+use App\Models\Image;
+use App\Models\Product;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
+use Illuminate\View\View;
 
 class ProductController extends Controller
 {
@@ -36,7 +36,7 @@ class ProductController extends Controller
             $products = Product::withCount('invoices')->latest()->paginate(8);
             Cache::put($key, $products);
         }
-      
+
         return view('admin.products.index', [
             'products' => $products,
         ]);
@@ -112,6 +112,7 @@ class ProductController extends Controller
 
             Cache::flush();
             Log::channel('custom')->info('Product Deleted by ' . auth()->user());
+
             return redirect()->route('admin.products.index')->with('status', trans('messages.success.product_deleted'));
         }
     }

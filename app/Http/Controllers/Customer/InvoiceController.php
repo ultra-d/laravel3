@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers\Customer;
 
+use App\Actions\GetInvoiceInformation;
+use App\Http\Controllers\Controller;
 use App\Models\Invoice;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\View\View;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use App\Actions\GetInvoiceInformation;
 
 class InvoiceController extends Controller
 {
@@ -36,7 +35,7 @@ class InvoiceController extends Controller
             ->where('user_id', auth()->id())
             ->with('products')
             ->first();
-   
+
         $pdf = PDF::loadView('customer.pdf', ['invoice' => $invoice]);
 
         return $pdf->stream();

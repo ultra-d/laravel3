@@ -2,9 +2,9 @@
 
 namespace App\Actions;
 
-use Illuminate\Http\Request;
 use App\Imports\Admin\ProductsImport;
 use App\Jobs\NotifyUserImportCompleted;
+use Illuminate\Http\Request;
 
 class ImportProductAction
 {
