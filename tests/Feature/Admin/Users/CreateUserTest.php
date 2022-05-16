@@ -1,28 +1,22 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Feature\Admin\Users;
 
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class CreateUserTest extends TestCase
 {
     use RefreshDatabase;
-    /**
-     * A basic feature test example.
-     *
-     * @return void
-     */
-    public function test_admin_can_create_user()
-    {
-        $this->withoutExceptionHandling();
-        $this->expectException('Illuminate\Auth\AuthenticationException');
 
-        $response = $this->get(route('admin.users.store'));
+    public function testAdminCanCreateUser(): void
+    {
+        $user = User::factory()->hasRoles(1, ['name' => 'Admin'])->create();
+
+        $response = $this->actingAs($user)->get(route('admin.users.create'));
+
         $response->assertViewIs('admin.users.create');
         $response->assertStatus(200);
     }
 }
-
-

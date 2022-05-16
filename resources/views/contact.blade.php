@@ -82,7 +82,7 @@
 				@enderror
 				<br>
 				
-				<button class="btn btn-primary btn-lg btn-block">
+				<button class="btn btn-primary btn-lg w-100">
 					{{ __('form.button.send')}}
 				</button>
 				

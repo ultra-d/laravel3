@@ -1,21 +1,16 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Feature\Auth\Users;
 
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class RegistrationTest extends TestCase
 {
     use RefreshDatabase;
-    /**
-     * A basic feature test example.
-     *
-     * @return void
-     */
-    public function test_user_can_register()
+
+    public function testUserCanRegister(): void
     {
         $response = $this->get('/register');
 
@@ -23,16 +18,15 @@ class RegistrationTest extends TestCase
 
         $response->assertViewIs('auth.register');
     }
-    
-    public function test_user_can_be_registered()
+
+    public function testUserCanBeRegistered(): void
     {
         $response = $this->post('/register', [
             'name' => 'Test User',
             'email' => 'testuser@example.com',
             'password' => 'password',
-            'password_confirmation' => 'password',
-        ]);
-        
+            'password_confirmation' => 'password',]);
+
         $this->assertAuthenticated();
         $response->assertRedirect(RouteServiceProvider::HOME);
     }

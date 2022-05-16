@@ -20,7 +20,7 @@
 					<th scope="col">{{ __('form.users.name')}}</th>
 					<th scope="col">{{ __('form.users.email')}}</th>
 					<th scope="col">{{ __('form.users.status')}}</th>
-					<th scope="col">{{ __('form.users.actions')}}</th>
+					<th scope="col" colspan="2">{{ __('form.users.actions')}}</th>
 					</tr>
 				</thead>
 				<tbody>

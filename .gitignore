@@ -2,6 +2,7 @@
 /public/hot
 /public/storage
 /storage/*.key
+/storage/images
 /vendor
 .env
 .env.backup
@@ -13,3 +14,6 @@ npm-debug.log
 yarn-error.log
 /.idea
 /.vscode
+.env.testing
+.php-cs-fixer.cache
+.DS_Store

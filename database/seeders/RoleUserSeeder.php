@@ -2,9 +2,9 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use App\Models\Role;
 use App\Models\User;
+use Illuminate\Database\Seeder;
 
 class RoleUserSeeder extends Seeder
 {
@@ -17,10 +17,8 @@ class RoleUserSeeder extends Seeder
     {
         $roles = Role::all();
 
-        User::all()->each(function ($user) use ($roles){
-            $user->roles()->attach(
-            $roles->random(1)->pluck('id')
-            ); // Crear seeder de role userr aleatorio
+        User::all()->each(function ($user) use ($roles) {
+            $user->roles()->attach($roles->random(1)->pluck('id')); // Crear seeder de role userr aleatorio
         });
     }
 }

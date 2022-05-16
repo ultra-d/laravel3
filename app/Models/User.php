@@ -4,25 +4,28 @@ namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Support\Facades\Hash;
+use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens;
+    use HasFactory;
+    use Notifiable;
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
      */
-    protected $fillable = [ // pendiente averiguar bien
+    protected $fillable = [
         'name',
         'email',
         'password',
-        'status'
+        'status',
     ];
 
     /**
@@ -43,9 +46,10 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
     public function setPasswordAttribute($password)
     {
-        if (Hash::needsRehash($password)){
+        if (Hash::needsRehash($password)) {
             $password = Hash::make($password);
         }
         $this->attributes['password'] = $password;
@@ -53,7 +57,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function roles()
     {
-        return $this->belongsToMany('App\Models\Role');
+        return $this->belongsToMany(Role::class);
     }
 
     public function hasAnyRole(string $role)
@@ -75,5 +79,14 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return (bool) $this->status;
     }
-    
+
+    public function invoices(): HasMany
+    {
+        return $this->hasMany(Invoice::class);
+    }
+
+    public function imports(): HasMany
+    {
+        return $this->hasMany(Import::class);
+    }
 }
