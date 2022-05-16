@@ -12,7 +12,7 @@ class GetInformationRequest implements WebcheckoutRequestContract
         $seed = date('c');
         $nonce = Str::random(8);
         $trankey = base64_encode(
-            hash('sha1', $nonce.$seed.config('webcheckout.tranKey'), true)
+            hash('sha512', $nonce.$seed.config('webcheckout.tranKey'), true)
         );
 
         /* Return data needed in the body to getInfo  */
