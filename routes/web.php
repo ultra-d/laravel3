@@ -5,6 +5,7 @@ use App\Http\Controllers\Shop\CartController;
 use App\Http\Controllers\Shop\PaymentController;
 use App\Http\Controllers\Customer\InvoiceController;
 use App\Http\Controllers\Customer\CustomerController;
+use App\Http\Controllers\Customer\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,10 +21,9 @@ Route::get('/', function () {
     return view('home');
 })->name('home')->middleware(['auth', 'verified']);
 
-Route::get('/search', 'App\Http\Controllers\SearchController@search');
-Route::get('/landing', 'App\Http\Controllers\SearchController@index')
-        ->middleware(['auth', 'verified'])
-        ->name('landing');
+//Dashboard
+Route::get('/items/search', [DashboardController::class, 'search'])->name('dash.search');
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dash.index');
 
 Route::view('/contact', 'contact')->name('contact')->middleware(['auth', 'verified']);
 Route::post('/contact', 'App\Http\Controllers\MessageController@store')->name('messages.store');
