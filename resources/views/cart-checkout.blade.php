@@ -1,19 +1,19 @@
 @extends('layout')
 
-@section('title', 'Cart')
+@section('title', trans('titles.cart'))
 
 @section('content')
 
 <div class="container mb-4">
     <main>
         <div class="py-5 text-center">
-            <h2>Checkout form</h2>
+            <h1>{{trans('titles.checkout_form')}}</h1>
         </div>
         
         <div class="row g-5">
             <div class="col-md-5 col-lg-4 order-md-last">
                 <h4 class="d-flex justify-content-between align-items-center mb-3">
-                    <span class="text-primary">Your cart</span>
+                    <span class="text-primary">{{trans('titles.cart')}}</span>
                     <span class="badge bg-primary rounded-pill">{{ \Gloudemans\Shoppingcart\Facades\Cart::content()->count() }}</span>
                 </h4>
                  <!-- Products in cart resume -->
@@ -23,20 +23,14 @@
                         <div>
                             <h6 class="my-0">{{ $cartItem->name}}</h6>
                             <hr class="my-1">
-                            <!-- Commented code to update number of items -->
-
-                            {{-- <small><input type="number" name="quantity" value="{{ $cartItem->qty}}"
-                                min="1" max="{{$cartItem->options->max}}"
-								class="text-sm sm:text-base px-2 pr-2 rounded-lg border 
-								border-gray-400 py-1 focus:outline-none focus:border-blue-300"
-								style="width: 50px"> </small> --}}
-                            <span class="text-muted">Cant: {{ $cartItem->qty}}</span>  
+                           
+                            <span class="text-muted">{{trans('form.products.short_qty')}}: {{ $cartItem->qty}}</span> 
                             
                              <!-- Remove item from cart-->
                             <small>
                                 <a href="#" class="px-2" style="text-decoration: none"
                                 onclick="document.getElementById('delete-item-cart').submit()" >
-                                Eliminar </a>
+                                {{trans('form.button.delete')}} </a>
                             </small>
                             <form id="delete-item-cart" class="d-none" method="POST" action="{{ route('shop.cart.destroy', $cartItem->rowId) }}">
                                 @csrf @method('DELETE')
@@ -46,91 +40,110 @@
                     </li>
                     @endforeach
                     <li class="list-group-item d-flex justify-content-between">
-                        <span>Total (USD)</span>
+                        <span>{{trans('form.invoice.total')}} (COP)</span>
                         <strong>${{ \Gloudemans\Shoppingcart\Facades\Cart::priceTotal() }}</strong>
                     </li>
                 </ul>
-                <!-- END Products in cart resume -->
             </div>
-            <!-- Buyer billing payment data  -->
+    
             <div class="col-md-7 col-lg-8">
-                <h4 class="mb-3">Billing address</h4>
+                <h4 class="mb-3">{{trans('form.billing.billing_info')}}</h4>
                 <form class="needs-validation" action="{{route('shop.cart.checkout')}}" method="post" novalidate>
                     @csrf
                     <div class="row g-3">
 
                         <div class="col-sm-6">
-                            <label for="firstName" class="form-label">First name</label>
-                            <input type="text" class="form-control" id="firstName" 
-                                name="buyer['name']" placeholder="Your name" value="{{ auth()->user()->name}}" required>
-                            <div class="invalid-feedback">
-                                Valid first name is required.
-                            </div>
+                            <label for="firstName" class="form-label">{{trans('form.users.name')}}</label>
+                            <input type="text" 
+                                class="form-control
+                                @error('firstName') is-invalid @else border-1 @enderror" 
+                                id="firstName" 
+                                name="buyer['name']" 
+                                placeholder="Your name" 
+                                value="{{ auth()->user()->name}}" required>
+                                @error('firstName')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong> {{$message}} </strong>
+                                    </span>
+                                @enderror
                         </div>
                     
                         <div class="col-sm-6">
-                            <label for="lastName" class="form-label">Last name</label>
-                            <input type="text" class="form-control" id="lastName" 
-                                name="buyer['surname']" placeholder="Your Last name" value="" required>
-                            <div class="invalid-feedback">
-                                Valid last name is required.
-                            </div>
+                            <label for="lastName" class="form-label">{{trans('form.users.surname')}}</label>
+                            <input type="text" 
+                                class="form-control
+                                @error('lastName') is-invalid @else border-1 @enderror" 
+                                id="lastName" 
+                                name="buyer['surname']" 
+                                placeholder="Your Last name" value="" required>
+                                @error('lastName')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong> {{$message}} </strong>
+                                    </span>
+                                @enderror
                         </div>
                         
                         <div class="col-12">
-                            <label for="email" class="form-label">Email <span class="text-muted">(Optional)</span></label>
-                            <input type="email" class="form-control" id="email" 
+                            <label for="email" class="form-label">{{trans('form.users.email')}}<span class="text-muted">(Optional)</span></label>
+                            <input type="email"
+                                class="form-control
+                                @error('email') is-invalid @else border-1 @enderror" 
+                                id="email" 
                                 name="buyer['email']" placeholder="you@example.com"  value="{{ auth()->user()->email}}">
-                            <div class="invalid-feedback">
-                                Please enter a valid email address for shipping updates.
-                            </div>
+                                @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong> {{$message}} </strong>
+                                    </span>
+                                @enderror
                         </div>
                         
                         <div class="col-12">
-                            <label for="address" class="form-label">Address</label>
-                            <input type="text" class="form-control" id="address" 
+                            <label for="address" class="form-label">{{trans('form.billing.address')}}</label>
+                            <input type="text" 
+                                class="form-control
+                                @error('address') is-invalid @else border-1 @enderror"
+                                id="address" 
                                 name="buyer['address']['street']" placeholder="1234 Main St" required>
-                            <div class="invalid-feedback">
-                                Please enter your shipping address.
-                            </div>
+                                @error('address')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong> {{$message}} </strong>
+                                    </span>
+                                @enderror
                         </div>
                     
                         <div class="col-md-5">
-                            <label for="country" class="form-label">Country</label>
+                            <label for="country" class="form-label">{{trans('form.billing.country')}}</label>
                             <select class="form-select" id="country" name="buyer['address']['country']" required>
                                 <option value="CO" selected>Colombia</option>
                             </select>
-                            <div class="invalid-feedback">
-                                Please select a valid country.
-                            </div>
                         </div>
                         
                         <div class="col-md-4">
-                            <label for="state" class="form-label">State</label>
+                            <label for="state" class="form-label">{{trans('form.billing.state')}}</label>
                             <select class="form-select" id="state" name="buyer['address']['state']" required>
                                 <option value="Norte de Santander" selected>Norte de Santander</option>
                                 <option value="Santander">Santander</option>
                                 <option value="Antioquia">Antioquia</option>
                             </select>
-                            <div class="invalid-feedback">
-                                Please provide a valid state.
-                            </div>
                         </div>
                         
                         <div class="col-md-3">
-                            <label for="zip" class="form-label">Zip</label>
-                            <input type="text" class="form-control" id="zip" name="buyer['address']['postalCode']" placeholder="">
-                            <div class="invalid-feedback">
-                                Zip code required.
-                            </div>
+                            <label for="zip" class="form-label">{{trans('form.billing.postal_code')}}</label>
+                            <input type="text"
+                                class="form-control
+                                @error('zip') is-invalid @else border-1 @enderror" 
+                                id="zip" name="buyer['address']['postalCode']" placeholder="12345" required>
+                                @error('zip')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong> {{$message}} </strong>
+                                    </span>
+                                @enderror
                         </div>
                     </div>
                     
                     <hr class="my-4">
                     
-                    
-                    
-                    <button class="w-100 btn btn-primary btn-lg" type="submit">Continue to checkout</button>
+                    <button class="w-100 btn btn-primary btn-lg" type="submit">{{trans('form.button.continue')}}</button>
                 </form>
             </div>
         </div>
