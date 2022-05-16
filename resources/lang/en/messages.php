@@ -29,6 +29,9 @@ return [
         'price' => 'PRICE = required/not null, integer, min:1',
         'quantity' => 'QTY = required/not null, numeric, min:1',
     ],
+    'alert' => [
+        'cannotdelete' => 'Can not be deleted because it has a relation with an invoice',
+    ],
     'exportready' => [
         'ready' => 'Your products document has been exported successfully',
         'download' => 'You can download it in the link below -> ',
@@ -52,5 +55,10 @@ return [
     ],
     'export' => [
         'message' => 'Your export has been started, we will email you when the file is ready!',
+    ],
+    'invoice_status' => [
+        'approved' => 'Your transaction was successful',
+        'pending' => 'Something went wrong with your transaction, by the moment it is pending to validate',
+        'failed' => 'Your payment could not be processed',
     ],
 ];

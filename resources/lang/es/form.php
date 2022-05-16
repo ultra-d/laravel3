@@ -34,6 +34,7 @@ return [
         'reports' => 'Reportes',
         'import' => 'Import',
         'import_file' => 'Import File',
+        'total' => 'Total',
     ],
 
     'fields' => [
@@ -68,5 +69,13 @@ return [
         'click' => 'Click Aquí',
         'management' => 'Administrador',
         'purchases' => 'Compras',
+        'go_purchases' => 'Ir a compras',
+    ],
+
+    'invoice' => [
+        'Transaction ID' => 'ID de Transacción',
+        'date' => 'Fecha',
+        'total' => 'Total',
+        'status' => 'Estado',
     ],
 ];
