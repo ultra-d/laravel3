@@ -70,6 +70,7 @@ return [
         'management' => 'Administrador',
         'purchases' => 'Compras',
         'go_purchases' => 'Ir a compras',
+        'continue' => 'Proceder con el pago',
     ],
 
     'invoice' => [
@@ -77,5 +78,13 @@ return [
         'date' => 'Fecha',
         'total' => 'Total',
         'status' => 'Estado',
+    ],
+
+    'billing' => [
+        'billing_info' => 'Información de Facturación',
+        'address' => 'Dirección',
+        'country' => 'País',
+        'state' => 'Estado',
+        'postal_code' => 'Código Postal',
     ],
 ];
