@@ -25,7 +25,8 @@ class InvoiceController extends Controller
     public function index(): View
     {
         return view('customer.summary', [
-            'invoices' => Invoice::latest()->paginate(8),
+            'invoices' => Invoice::where('user_id', auth()->id())
+                ->latest()->paginate(8),
         ]);
     }
 
