@@ -45,7 +45,7 @@ class WebcheckoutTest extends TestCase
                     'total' => '10000',
                 ],
             ],
-            'returnUrl' => route('customer.purchase.index'),
+            'returnUrl' => route('customer.invoices.index'),
             'expiration' => date('c', strtotime('+2 days')),
         ];
     }

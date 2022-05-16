@@ -19,4 +19,6 @@ return [
     'psummary' => 'Purchase Summary',
     'invoices_summary' => 'Invoices Summary',
     'billing_history' => 'Billing History',
+    'checkout_form' => 'Checkout Form',
+    'cart' => 'Your Cart',
 ];

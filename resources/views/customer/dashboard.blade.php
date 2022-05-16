@@ -1,6 +1,6 @@
 @extends('layout')
 
-@section('title', 'Landing')
+@section('title', 'Dashboard')
 
 @section('content')
 
@@ -9,42 +9,32 @@
 @endif
 
 <div class="container py-3">
-
-	<div class="form-outline">
-			
-			<form class="form-inline my-2 my-lg-0 d-flex justify-content-between flex-nowrap" 
-			type="get" action="{{ url('/search') }}">
-				<input 
-					type="search" 
-					id="search"
-					name="title"
-					class="form-control mr-sm-2
-					@error('title')
-					is-invalid @else border-1
-					@enderror" 
-					placeholder="{{__('form.products.search_p')}}" 
-					aria-label="Search" />
-					@error('title')
-					<span class="invalid-feedback" role="alert">
-						<strong>{{ $message}}</strong>
-					</span>
-					@enderror
-
-					<select class="form-control border-0 bg-light shadow-sm"
-					name="category_id" type="search" id="category_id">
-						<option value=""> Categoria </option>
-						@foreach ($categories as $id => $name)
-						<option value="{{ $id }}"> {{ $name }}</option>	
-						@endforeach
-					</select>
-	
-			</form>
-	</div>
 	
 	<div class="d-flex justify-content-between align-items-center">
-		<h1 class="display-4 mb-0">Products</h1>
+		<h1 class="display-4 mb-2">Products</h1>
 	</div>
-	
+
+    <div class="form-outline">
+        <form class="form-inline my-2 my-lg-0 d-flex justify-content-between flex-nowrap" 
+        type="get" action="{{ url('/items/search') }}">
+            <input 
+                type="search" 
+                id="search"
+                name="title"
+                class="form-control mr-sm-2
+                @error('title')
+                is-invalid @else border-1
+                @enderror" 
+                placeholder="{{__('form.products.search_p')}}" 
+                aria-label="Search" />
+                @error('title')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message}}</strong>
+                </span>
+                @enderror
+        </form>
+    </div>
+
 	<div class="d-flex flex-wrap justify-content-between align-items-start ">
 		@forelse($products as $product)
 		<div class="card border-0 shadow-sm mt-4 mx-auto p-0" style="width: 18rem;">
@@ -73,14 +63,18 @@
 				<p class="card-text text-truncate"> {{ $product->description }} </p>
 				<h6 class="card-subtitle"> $ {{ $product->price}} </h6>
 				<br>
-				@if($product->status == false)
-				<p>*DISABLE*</p>
-				@endif
 				<div class="d-flex justify-content-between align-items-center">
 					<span class="badge bg-secondary">
 						{{ $product->category ? $product->category->name : '' }}
 					</span>
-					<add-product-button :product='@json($product)'></add-product-button>
+					@if($product->status == false)
+						disable
+					@elseif ($product->quantity == 0)
+						sin stock
+					@else
+						<add-product-button :product='@json($product)'></add-product-button>
+					@endif
+					
 				</div>
 			</div>
 		</div>

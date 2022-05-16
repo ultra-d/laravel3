@@ -19,4 +19,6 @@ return [
     'psummary' => 'Resumen de la compra',
     'invoices_summary' => 'Resumen de Compras',
     'billing_history' => 'Historial de Facturación',
+    'checkout_form' => 'Formulario de Pago',
+    'cart' => 'Tu Carrito',
 ];

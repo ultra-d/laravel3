@@ -1,20 +1,21 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Customer;
 
+use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Product;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
-class SearchController extends Controller
+class DashboardController extends Controller
 {
     public function index(): View
     {
         $cart = Cart::content();
 
-        return view('landing-menu', [
+        return view('customer.dashboard', [
             'products' => Product::latest()->with('category')->paginate(8),
             'categories' => Category::pluck('id', 'name'),
             $cart,
@@ -33,7 +34,7 @@ class SearchController extends Controller
             ->title($title)
             ->paginate();
 
-        return view('landing-menu', [
+        return view('customer/dashboard', [
             'products' => $products,
             'categories' => Category::pluck('id', 'name'),
         ]);

@@ -8,6 +8,7 @@ use App\Models\Role;
 use App\Models\User;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Log;
 
 class UserController extends Controller
 {
@@ -26,6 +27,8 @@ class UserController extends Controller
         $user = User::create($request->only(['name', 'email', 'password']));
 
         $user->roles()->sync($request->roles);
+
+        Log::channel('custom')->info('User Created by' . auth()->user());
 
         return redirect(route('admin.users.index'))->with('status', 'Usuario creado');
     }
@@ -53,6 +56,8 @@ class UserController extends Controller
     public function destroy(User $user): RedirectResponse
     {
         User::destroy($user);
+
+        Log::channel('custom')->info('User Deleted by' . auth()->user());
 
         return redirect(route('admin.users.index'))->with('status', 'Usuario Eliminado');
     }

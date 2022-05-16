@@ -41,7 +41,6 @@ class StoreProductTest extends TestCase
 
         $response = $this->actingAs($user)
             ->post(route('admin.products.store'), $data);
-        //$response->dump()->dumpSession();
         $response->assertSessionDoesntHaveErrors()
             ->assertRedirect(route('admin.products.index'));
 
@@ -63,9 +62,6 @@ class StoreProductTest extends TestCase
             'description' => 'my awesome test product description',
             'price' => 200000,
             'quantity' => 10,
-            /* 'images' => [
-                UploadedFile::fake()->image('product.jpg')->size(50),
-            ], */
         ];
     }
 }

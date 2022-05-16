@@ -19,6 +19,13 @@ class CartController extends Controller
 {
     public function index(): View
     {
+        foreach (Cart::content() as $product) {
+            if ($product->qty > $product->options->max) {
+                echo('There are just ' . $product->options->max . ' of ' . $product->name . ' availables');
+                Cart::update($product->rowId, $product->options->max);
+            }
+        }
+
         return view('cart-checkout', [
             'cart' => Cart::content(),
             'user' => User::pluck('name'),
@@ -69,9 +76,8 @@ class CartController extends Controller
         $data['payment']['reference'] = $invoice->reference;
         $data['payment']['redirectUrl'] = route('customer.invoices.show', ['reference' => $invoice->reference]);
         $session = new CreateSessionRequest($data);
-        //dd($data);
+
         $response = Http::post(CreateSessionRequest::url(), $session->toArray());
-        //dd($response->json());
 
         if ($response->ok()) {
             Cart::destroy();
