@@ -8,6 +8,7 @@ use App\Models\Category;
 use Illuminate\View\View;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use App\Actions\ExportProductAction;
 use App\Actions\ImportProductAction;
 use App\Actions\UpdateProductAction;
@@ -62,6 +63,8 @@ class ProductController extends Controller
 
         Cache::flush();
 
+        Log::channel('custom')->info('Product Created by ' . auth()->user());
+
         return redirect()->route('admin.products.index')->with('status', trans('messages.success.product_created'));
     }
 
@@ -108,7 +111,7 @@ class ProductController extends Controller
             $product->delete();
 
             Cache::flush();
-
+            Log::channel('custom')->info('Product Deleted by ' . auth()->user());
             return redirect()->route('admin.products.index')->with('status', trans('messages.success.product_deleted'));
         }
     }
