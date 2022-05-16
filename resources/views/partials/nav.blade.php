@@ -19,7 +19,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome
 		<ul class="nav me-auto">
 			@auth
 			<li class="nav-item">
-				<a class="nav-link" href="{{ url('/landing') }}">{{ trans('Products') }}</a>
+				<a class="nav-link" href="{{ url('/dashboard') }}">{{ trans('Products') }}</a>
 			</li>
 			<li class="nav-item">
 				<a class="nav-link" href="{{ route('contact') }}">{{ trans('titles.Contact') }}</a>

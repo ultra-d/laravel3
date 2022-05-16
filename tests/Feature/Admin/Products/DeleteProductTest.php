@@ -26,17 +26,6 @@ class DeleteProductTest extends TestCase
         $this->assertTrue(true);
     }
 
-    /* public function test_an_admin_can_delete_a_product()
-    {
-        $this->assertDatabaseHas('products', ['title'=> $this->product->title]);
-
-        $this->delete(route('admin.products.destroy', $this->product))
-            ->assertStatus(302)
-            ->assertRedirect(route('admin.products.index'));
-
-        $this->assertDeleted('products', array($this->product));
-    }
- */
     public function testAnAdminCanDeleteProducts()
     {
         Storage::fake('image');
